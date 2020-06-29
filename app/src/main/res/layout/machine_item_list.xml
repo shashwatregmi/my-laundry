@@ -63,7 +63,7 @@
             android:layout_marginBottom="48dp"
             android:background="@drawable/book_btn"
             android:fontFamily="@font/aldrich"
-            android:text="BOOK"
+            android:text="@string/book"
             android:textColor="#F3EAB926"
             android:textSize="10sp"
             android:typeface="monospace" />

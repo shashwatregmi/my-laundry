@@ -1,9 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme. -->
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#2B75D3</item>
-        <item name="colorPrimaryDark">#FA555555</item>
+        <item name="colorPrimaryDark">#FAF4F4F4</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
 </resources>

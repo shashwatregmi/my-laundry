@@ -38,6 +38,8 @@ public class HomeFragment extends Fragment {
         ArrayList<MachineItemList> machineItemList = new ArrayList<>();
 
         machineItemList.add(new MachineItemList(R.drawable.washer, "Washer #1", "This washer is currently available!"));
+        machineItemList.add(new MachineItemList(R.drawable.washer, "Washer #2", "This washer is currently available!"));
+
 
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 

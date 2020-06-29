@@ -11,10 +11,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mylaundry.MachineItemList;
+import com.example.mylaundry.MachineListAdapter;
 import com.example.mylaundry.R;
 
+import java.util.ArrayList;
+
+import javax.crypto.Mac;
+
 public class HomeFragment extends Fragment {
+    private RecyclerView view;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     private HomeViewModel homeViewModel;
 
@@ -22,6 +33,23 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
-        return inflater.inflate(R.layout.fragment_home, container, false);
+
+
+        ArrayList<MachineItemList> machineItemList = new ArrayList<>();
+
+        machineItemList.add(new MachineItemList(R.drawable.washer, "Washer #1", "This washer is currently available!"));
+
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        view = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        view.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getContext());
+        adapter = new MachineListAdapter(machineItemList);
+
+        view.setLayoutManager(layoutManager);
+        view.setAdapter(adapter);
+
+
+        return rootView;
     }
 }

@@ -88,7 +88,19 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="imagePath" value="/private/var/folders/ly/gq7pf46s3yxbl4qlvw1vk_7h0000gn/T/ic_android_black_24dp.xml" />
+                                                <entry key="color" value="ffffff" />
+                                                <entry key="imagePath" value="/private/var/folders/ly/gq7pf46s3yxbl4qlvw1vk_7h0000gn/T/baseline_local_laundry_service_24.xml" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                      <entry key="foregroundClipartAsset">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material/icons/materialicons/local_laundry_service/baseline_local_laundry_service_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -100,7 +112,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="$USER_HOME$/Downloads/calendar.png" />
+                                                <entry key="imagePath" value="$USER_HOME$/Downloads/ic_launcher/web_hi_res_512.png" />
+                                                <entry key="scalingPercent" value="67" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -132,7 +145,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="calendar" />
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="1979a9" />
+                                      <entry key="foregroundAssetType" value="CLIP_ART" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -301,11 +316,6 @@
                                 </PersistentState>
                               </value>
                             </entry>
-                          </map>
-                        </option>
-                        <option name="values">
-                          <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>

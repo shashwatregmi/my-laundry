@@ -24,7 +24,7 @@ import javax.crypto.Mac;
 
 public class HomeFragment extends Fragment {
     private RecyclerView view;
-    private RecyclerView.Adapter adapter;
+    private MachineListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
     private HomeViewModel homeViewModel;
@@ -50,7 +50,6 @@ public class HomeFragment extends Fragment {
 
         view.setLayoutManager(layoutManager);
         view.setAdapter(adapter);
-
 
         return rootView;
     }

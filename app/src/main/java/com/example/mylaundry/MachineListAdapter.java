@@ -17,17 +17,36 @@ import javax.crypto.Mac;
 
 public class MachineListAdapter extends RecyclerView.Adapter<MachineListAdapter.MachineViewHolder> {
     private ArrayList<MachineItemList> machineList = new ArrayList<>();
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
 
     public static class MachineViewHolder extends RecyclerView.ViewHolder{
         public ImageView imgView;
         public TextView titleTxtView;
         public TextView descTxtView;
 
-        public MachineViewHolder(@NonNull View itemView) {
+        public MachineViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             imgView = itemView.findViewById(R.id.imageView);
             titleTxtView = itemView.findViewById(R.id.titleView);
             descTxtView = itemView.findViewById(R.id.descView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) listener.onItemClick(position);
+                    }
+                }
+            });
         }
     }
 
@@ -39,7 +58,7 @@ public class MachineListAdapter extends RecyclerView.Adapter<MachineListAdapter.
     @Override
     public MachineViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.machine_item_list, parent, false);
-        MachineViewHolder machViewHolder = new MachineViewHolder(view);
+        MachineViewHolder machViewHolder = new MachineViewHolder(view, listener);
         return machViewHolder;
     }
 
@@ -56,4 +75,5 @@ public class MachineListAdapter extends RecyclerView.Adapter<MachineListAdapter.
     public int getItemCount() {
         return machineList.size();
     }
+
 }

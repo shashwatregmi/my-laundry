@@ -2,7 +2,7 @@ package com.example.mylaundry;
 
 import javax.crypto.Mac;
 
-public class MachineItemList {
+public class MachineItemList{
     private int img;
     private String title;
     private String desc;
@@ -24,4 +24,5 @@ public class MachineItemList {
     public String getDesc(){
         return desc;
     }
+
 }

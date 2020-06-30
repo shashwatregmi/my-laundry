@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: gr.pantrif:easy-android-splash-screen:0.0.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/98f6a0fa7053527274108db48e6979fb/jetified-easy-android-splash-screen-0.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/98f6a0fa7053527274108db48e6979fb/jetified-easy-android-splash-screen-0.0.1/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/gr.pantrif/easy-android-splash-screen/0.0.1/818bb70fb37291eacab2f89ab905f6a07451b2b3/easy-android-splash-screen-0.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/gr.pantrif/easy-android-splash-screen/0.0.1/822490489284f0769a53341495ad1d743110f24f/easy-android-splash-screen-0.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

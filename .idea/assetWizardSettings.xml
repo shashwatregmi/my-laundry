@@ -24,8 +24,20 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="/private/var/folders/ly/gq7pf46s3yxbl4qlvw1vk_7h0000gn/T/ic_android_black_24dp.xml" />
-                                                <entry key="opacityPercent" value="60" />
+                                                <entry key="imagePath" value="/private/var/folders/ly/gq7pf46s3yxbl4qlvw1vk_7h0000gn/T/baseline_local_laundry_service_24.xml" />
+                                                <entry key="opacityPercent" value="80" />
+                                                <entry key="paddingPercent" value="-5" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                      <entry key="clipartAsset">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material/icons/materialicons/local_laundry_service/baseline_local_laundry_service_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -70,9 +82,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="imageAsset" value="$USER_HOME$/Downloads/calendar.png" />
-                                      <entry key="outputName" value="ic_calendar" />
+                                      <entry key="outputName" value="splash" />
+                                      <entry key="theme" value="CUSTOM" />
+                                      <entry key="themeColor" value="1979a9" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -146,7 +159,6 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="1979a9" />
                                       <entry key="foregroundAssetType" value="CLIP_ART" />
                                     </map>
                                   </option>
@@ -316,6 +328,11 @@
                                 </PersistentState>
                               </value>
                             </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>

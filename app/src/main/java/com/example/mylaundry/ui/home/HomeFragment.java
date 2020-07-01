@@ -1,5 +1,6 @@
 package com.example.mylaundry.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,10 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mylaundry.BookActivity;
 import com.example.mylaundry.MachineItemList;
 import com.example.mylaundry.MachineListAdapter;
+import com.example.mylaundry.MainActivity;
 import com.example.mylaundry.R;
 
 import java.util.ArrayList;
@@ -26,16 +29,16 @@ public class HomeFragment extends Fragment {
     private RecyclerView view;
     private MachineListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<MachineItemList> machineItemList = new ArrayList<>();
 
     private HomeViewModel homeViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
 
 
-        ArrayList<MachineItemList> machineItemList = new ArrayList<>();
 
         machineItemList.add(new MachineItemList(R.drawable.washer, "Washer #1", "This washer is currently available!"));
         machineItemList.add(new MachineItemList(R.drawable.washer, "Washer #2", "This washer is currently available!"));
@@ -50,6 +53,15 @@ public class HomeFragment extends Fragment {
 
         view.setLayoutManager(layoutManager);
         view.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new MachineListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(getContext(), BookActivity.class);
+                intent.putExtra("Machine", machineItemList.get(position));
+                startActivity(intent);
+            }
+        });
 
         return rootView;
     }

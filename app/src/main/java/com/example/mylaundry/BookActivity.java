@@ -31,7 +31,8 @@ public class BookActivity extends AppCompatActivity {
         txtview.setText(title);
 
         calendar = (CalendarView) findViewById(R.id.calendarView);
-
+        calendar.setMinDate(System.currentTimeMillis() - 1000);
+        
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @SuppressLint("SetTextI18n")
             @Override

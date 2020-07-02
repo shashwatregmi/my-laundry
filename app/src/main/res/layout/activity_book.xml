@@ -8,10 +8,9 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="388dp"
-        android:layout_height="27dp"
+        android:layout_width="327dp"
+        android:layout_height="25dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="Washer #"
         android:textColor="#A3A2A2"
@@ -19,7 +18,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.025" />
@@ -46,4 +45,29 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
+    <ImageButton
+        android:id="@+id/todayButton"
+        android:layout_width="44dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_today" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Today"
+        app:layout_constraintEnd_toEndOf="@+id/todayButton"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/todayButton"
+        app:layout_constraintTop_toBottomOf="@+id/todayButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/book_btn"
+    android:fontFamily="sans-serif-smallcaps"
+    android:text="Test"
+    android:textColor="#8E8C8C"
+    android:textSize="14dp"
+    android:textStyle="bold"
+    android:padding="3dp"
+    >
+
+</CheckedTextView>

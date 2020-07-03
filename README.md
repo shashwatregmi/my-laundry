@@ -1,2 +1,2 @@
 # MyLaundry
-Communal laundry made easy!
+[IN PROGRESS] Communal laundry made easy!

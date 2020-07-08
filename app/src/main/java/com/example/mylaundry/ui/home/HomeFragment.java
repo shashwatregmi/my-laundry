@@ -1,6 +1,8 @@
 package com.example.mylaundry.ui.home;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -62,6 +65,10 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ((Activity) rootView.getContext()).getWindow().setStatusBarColor(ContextCompat.getColor(rootView.getContext(), R.color.main));
+        }
 
         return rootView;
     }

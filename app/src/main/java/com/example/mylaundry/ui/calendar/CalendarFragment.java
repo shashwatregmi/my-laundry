@@ -3,18 +3,21 @@ package com.example.mylaundry.ui.calendar;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +28,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mylaundry.BookActivity;
+import com.example.mylaundry.Booking;
 import com.example.mylaundry.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,6 +48,10 @@ public class CalendarFragment extends Fragment {
     TimePickerDialog timePicker;
     String TODAY = "";
     private CalendarViewModel calendarViewModel;
+    FirebaseFirestore db;
+    Spinner dropdown;
+    int spinnerposition;
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,7 +62,7 @@ public class CalendarFragment extends Fragment {
 
         machineList.add("Washer #1");
         machineList.add("Washer #2");
-
+        db = FirebaseFirestore.getInstance();
         //TODO: pull data from DB and place into this array list..
 
         View root = inflater.inflate(R.layout.fragment_calendar, container, false);
@@ -68,6 +81,19 @@ public class CalendarFragment extends Fragment {
         final TextView todayView = root.findViewById(R.id.temptext);
 
         todayView.setText(TODAY);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View view, int position, long id) {
+                spinnerposition = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
 
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -96,9 +122,22 @@ public class CalendarFragment extends Fragment {
                 TimePickerDialog timePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        String tempTime = String.valueOf(hourOfDay) + ":" + String.valueOf(minute);
-                        todayView.setText(tempTime);
-                        // TODO: need to do booking stuff here.
+                        CollectionReference dbBooking = db.collection("bookings");
+
+                        Booking booking = new Booking(spinnerposition + 1, hourOfDay, minute, String.valueOf(todayView.getText()));
+
+                        dbBooking.add(booking)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Toast.makeText(getContext(), "Code will be provided here", Toast.LENGTH_LONG).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
                 }, timeNow.get(Calendar.HOUR_OF_DAY), timeNow.get(Calendar.MINUTE), false);
                 timePicker.show();

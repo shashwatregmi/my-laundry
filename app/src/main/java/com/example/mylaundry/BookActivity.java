@@ -18,6 +18,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -29,15 +36,18 @@ public class BookActivity extends AppCompatActivity {
     Button book;
     TimePickerDialog timePicker;
     String TODAY = "";
+    FirebaseFirestore db;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        db = FirebaseFirestore.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         MachineItemList machine = intent.getParcelableExtra("Machine");
+        assert machine != null;
         String title = machine.getTitle();
 
         TextView txtview = findViewById(R.id.textView);
@@ -79,9 +89,23 @@ public class BookActivity extends AppCompatActivity {
                 TimePickerDialog timePicker = new TimePickerDialog(BookActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        String tempTime = String.valueOf(hourOfDay) + ":" + String.valueOf(minute);
-                        todayView.setText(tempTime);
-                        // TODO: need to do booking stuff here.
+                        CollectionReference dbBooking = db.collection("bookings");
+                        int washerNumber = intent.getIntExtra("Number", 0);
+
+                        Booking booking = new Booking(washerNumber, hourOfDay, minute, String.valueOf(todayView.getText()));
+
+                        dbBooking.add(booking)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(BookActivity.this, "Code will be provided here", Toast.LENGTH_LONG).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(BookActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
                 }, timeNow.get(Calendar.HOUR_OF_DAY), timeNow.get(Calendar.MINUTE), false);
                 timePicker.show();

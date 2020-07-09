@@ -62,6 +62,8 @@ public class HomeFragment extends Fragment {
             public void onItemClick(int position) {
                 Intent intent = new Intent(getContext(), BookActivity.class);
                 intent.putExtra("Machine", machineItemList.get(position));
+                intent.putExtra("Number", position + 1);
+
                 startActivity(intent);
             }
         });

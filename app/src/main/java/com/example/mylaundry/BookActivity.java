@@ -3,6 +3,7 @@ package com.example.mylaundry;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -52,6 +53,17 @@ public class BookActivity extends AppCompatActivity {
         ArrayList<Booking> dbBooking = new ArrayList<>();
 
         //TODO: add database pulled bookings here....
+        // will need to filter by current date and machine...
+        // repeat this process when date changes onClick below...
+
+        dbBooking.add(new Booking(1,12, 00, "12/07/2020"));
+
+        bookingRecyclerView = findViewById(R.id.bookings);
+        bookingLayoutManager = new LinearLayoutManager(this);
+        bookingAdapter = new BookItemAdapter(dbBooking);
+
+        bookingRecyclerView.setLayoutManager(bookingLayoutManager);
+        bookingRecyclerView.setAdapter(bookingAdapter);
 
         final Intent intent = getIntent();
         MachineItemList machine = intent.getParcelableExtra("Machine");

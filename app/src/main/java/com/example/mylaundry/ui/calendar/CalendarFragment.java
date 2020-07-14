@@ -26,8 +26,11 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mylaundry.BookActivity;
+import com.example.mylaundry.BookItemAdapter;
 import com.example.mylaundry.Booking;
 import com.example.mylaundry.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -51,6 +54,9 @@ public class CalendarFragment extends Fragment {
     FirebaseFirestore db;
     Spinner dropdown;
     int spinnerposition;
+    private RecyclerView bookingRecyclerView;
+    private RecyclerView.Adapter bookingAdapter;
+    private RecyclerView.LayoutManager bookingLayoutManager;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -74,6 +80,22 @@ public class CalendarFragment extends Fragment {
 
         calendar = (CalendarView) root.findViewById(R.id.calendarView);
         calendar.setMinDate(System.currentTimeMillis() - 1000);
+
+        ArrayList<Booking> dbBooking = new ArrayList<>();
+
+        //TODO: add database pulled bookings here....
+        // will need to filter by current date and machine...
+        // repeat this process when date changes onClick below...
+
+        dbBooking.add(new Booking(1,12, 00, "12/07/2020"));
+
+        bookingRecyclerView = root.findViewById(R.id.bookings);
+        bookingLayoutManager = new LinearLayoutManager(getContext());
+        bookingAdapter = new BookItemAdapter(dbBooking);
+
+        bookingRecyclerView.setLayoutManager(bookingLayoutManager);
+        bookingRecyclerView.setAdapter(bookingAdapter);
+
 
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();

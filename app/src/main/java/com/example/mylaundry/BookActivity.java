@@ -3,6 +3,7 @@ package com.example.mylaundry;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
@@ -26,6 +27,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -37,6 +39,9 @@ public class BookActivity extends AppCompatActivity {
     TimePickerDialog timePicker;
     String TODAY = "";
     FirebaseFirestore db;
+    private RecyclerView bookingRecyclerView;
+    private RecyclerView.Adapter bookingAdapter;
+    private RecyclerView.LayoutManager bookingLayoutManager;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -44,6 +49,9 @@ public class BookActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
+        ArrayList<Booking> dbBooking = new ArrayList<>();
+
+        //TODO: add database pulled bookings here....
 
         final Intent intent = getIntent();
         MachineItemList machine = intent.getParcelableExtra("Machine");

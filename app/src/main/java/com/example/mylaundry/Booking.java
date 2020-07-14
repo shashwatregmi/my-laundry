@@ -51,30 +51,31 @@ public class Booking {
 
     public String getMonth() {
         String temp = date.substring(3, 5);
-        if (temp == "01"){
-            return "Jan";
-        } else if (temp == "02"){
-            return "Feb";
-        } else if (temp == "03") {
-            return "Mar";
-        } else if (temp == "04") {
-            return "April";
-        } else if (temp == "05") {
-            return "May";
-        } else if (temp == "06") {
-            return "June";
-        } else if (temp == "07") {
-            return "July";
-        } else if (temp == "08") {
-            return "Aug";
-        } else if (temp == "09") {
-            return "Sept";
-        } else if (temp == "10") {
-            return "Oct";
-        } else if (temp == "11") {
-            return "Nov";
-        } else if (temp == "12") {
-            return "Dec";
+        switch (temp) {
+            case "01":
+                return "Jan";
+            case "02":
+                return "Feb";
+            case "03":
+                return "Mar";
+            case "04":
+                return "April";
+            case "05":
+                return "May";
+            case "06":
+                return "June";
+            case "07":
+                return "July";
+            case "08":
+                return "Aug";
+            case "09":
+                return "Sept";
+            case "10":
+                return "Oct";
+            case "11":
+                return "Nov";
+            case "12":
+                return "Dec";
         }
         return null;
     }

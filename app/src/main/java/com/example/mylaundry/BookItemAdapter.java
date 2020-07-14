@@ -47,7 +47,13 @@ public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.BookVi
         Booking booking = bookings.get(position);
         holder.dayView.setText(booking.getDay());
         holder.monthView.setText(booking.getMonth());
-        holder.timeView.setText(booking.getHour() + ":" + booking.getMinute());
+        String time;
+        if (booking.getMinute() == 0){
+            time = booking.getHour() + ":" + "00";
+        } else {
+            time = booking.getHour() + ":" + booking.getMinute();
+        }
+        holder.timeView.setText(time);
         holder.washerView.setText("Washer #" + booking.getWasher());
     }
 

@@ -13,6 +13,8 @@ public class Booking {
         this.date = date;
     }
 
+    public Booking(){}
+
     public void setWasher(int washer) {
         this.washer = washer;
     }

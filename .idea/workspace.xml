@@ -20,8 +20,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/ui/calendar/CalendarFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/ui/calendar/CalendarFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_calendar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_calendar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/BookActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/BookActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/Booking.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -296,5 +296,9 @@
     </state>
     <state x="497" y="214" key="chooseDestDirectoryDialog/0.23.1440.812@0.23.1440.812" timestamp="1594110499006" />
     <state x="497" y="214" key="chooseDestDirectoryDialog/0.23.1440.813@0.23.1440.813" timestamp="1593479184573" />
+    <state x="100" y="123" width="1240" height="612" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1594801145170">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state x="100" y="123" width="1240" height="612" key="com.android.tools.idea.avdmanager.AvdListDialog/0.23.1440.812@0.23.1440.812" timestamp="1594801145170" />
   </component>
 </project>

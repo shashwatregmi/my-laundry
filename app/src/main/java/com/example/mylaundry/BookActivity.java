@@ -142,7 +142,11 @@ public class BookActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         CollectionReference dbBooking = db.collection("bookings");
-                        Booking booking = new Booking(washerNumber, hourOfDay, minute, String.valueOf(todayView.getText()));
+                        int bookingEnd = 0;
+                        if (hourOfDay != 24){
+                            bookingEnd = hourOfDay+1;
+                        }
+                        Booking booking = new Booking(washerNumber, hourOfDay, minute, String.valueOf(todayView.getText()), bookingEnd);
 
                         dbBooking.add(booking)
                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

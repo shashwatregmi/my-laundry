@@ -48,12 +48,44 @@ public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.BookVi
         holder.dayView.setText(booking.getDay());
         holder.monthView.setText(booking.getMonth());
         String time;
-        if (booking.getMinute() == 0){
-            time = booking.getHour() + ":" + "00";
+        String endtime;
+
+
+
+        if (booking.getMinute() == 0) {
+            if (booking.getHour() == 0 && booking.getEndHr() == 0) {
+                time = "00" + ":" + "00";
+                endtime = "00" + ":00";
+
+            } else if (booking.getHour() != 0 && booking.getEndHr() == 0) {
+                time = booking.getHour() + ":" + "00";
+                endtime = "00" + ":00";
+            } else if (booking.getHour() == 0 && booking.getEndHr() != 0) {
+                time = "00" + ":" + "00";
+                endtime = booking.getEndHr() + ":00";
+            } else {
+                time = booking.getHour() + ":" + "00";
+            }
+            endtime = booking.getEndHr() + ":00";
         } else {
-            time = booking.getHour() + ":" + booking.getMinute();
+            if (booking.getHour() == 0 && booking.getEndHr() == 0) {
+                time = "00" + ":" + booking.getMinute();
+                endtime = "00" + ":" + booking.getMinute();
+
+            } else if (booking.getHour() != 0 && booking.getEndHr() == 0) {
+                time = booking.getHour() + ":" + booking.getMinute();
+                endtime = "00" + ":" + booking.getMinute();
+            } else if (booking.getHour() == 0 && booking.getEndHr() != 0) {
+                time = "00" + ":" + booking.getMinute();
+                endtime = booking.getEndHr() + ":" + booking.getMinute();
+            } else {
+                time = booking.getHour() + ":" + booking.getMinute();
+            }
+            endtime = booking.getEndHr() + ":" + booking.getMinute();
         }
-        holder.timeView.setText(time);
+
+        String displayTime = time + " to " + endtime;
+        holder.timeView.setText(displayTime);
         holder.washerView.setText("Washer #" + booking.getWasher());
     }
 

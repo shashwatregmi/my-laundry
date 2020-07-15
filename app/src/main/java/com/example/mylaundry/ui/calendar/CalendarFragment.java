@@ -98,8 +98,9 @@ public class CalendarFragment extends Fragment {
 
                             for (DocumentSnapshot d: tempBookings){
                                 Booking pulledBooking = d.toObject(Booking.class);
-                                dbBooking.add(pulledBooking);
-                            }
+                                if (pulledBooking.getDate().equals(TODAY) && pulledBooking.getWasher() == spinnerposition + 1){
+                                    dbBooking.add(pulledBooking);
+                                }                            }
                             bookingAdapter.notifyDataSetChanged();
                         }
                     }

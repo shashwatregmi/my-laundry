@@ -55,6 +55,11 @@ public class BookActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        TODAY = dateFormat.format(date);
+        final Intent intent = getIntent();
+        final int washerNumber = intent.getIntExtra("Number", 0);
 
         //TODO: add database pulled bookings here....
         // will need to filter by current date and machine...
@@ -68,7 +73,9 @@ public class BookActivity extends AppCompatActivity {
 
                             for (DocumentSnapshot d: tempBookings){
                                 Booking pulledBooking = d.toObject(Booking.class);
-                                dbBooking.add(pulledBooking);
+                                if (pulledBooking.getDate().equals(TODAY) && pulledBooking.getWasher() == washerNumber){
+                                    dbBooking.add(pulledBooking);
+                                }
                             }
                             bookingAdapter.notifyDataSetChanged();
                         }
@@ -82,7 +89,6 @@ public class BookActivity extends AppCompatActivity {
         bookingRecyclerView.setLayoutManager(bookingLayoutManager);
         bookingRecyclerView.setAdapter(bookingAdapter);
 
-        final Intent intent = getIntent();
         MachineItemList machine = intent.getParcelableExtra("Machine");
         assert machine != null;
         String title = machine.getTitle();
@@ -92,9 +98,7 @@ public class BookActivity extends AppCompatActivity {
         calendar = (CalendarView) findViewById(R.id.calendarView);
         calendar.setMinDate(System.currentTimeMillis() - 1000);
 
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        TODAY = dateFormat.format(date);
+
         final TextView todayView = findViewById(R.id.temptext);
 
         todayView.setText(TODAY);
@@ -138,8 +142,6 @@ public class BookActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         CollectionReference dbBooking = db.collection("bookings");
-                        int washerNumber = intent.getIntExtra("Number", 0);
-
                         Booking booking = new Booking(washerNumber, hourOfDay, minute, String.valueOf(todayView.getText()));
 
                         dbBooking.add(booking)

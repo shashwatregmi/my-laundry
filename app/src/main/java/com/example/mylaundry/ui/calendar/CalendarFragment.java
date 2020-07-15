@@ -37,11 +37,14 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class CalendarFragment extends Fragment {
 
@@ -57,6 +60,7 @@ public class CalendarFragment extends Fragment {
     private RecyclerView bookingRecyclerView;
     private RecyclerView.Adapter bookingAdapter;
     private RecyclerView.LayoutManager bookingLayoutManager;
+    private ArrayList<Booking> dbBooking = new ArrayList<>();
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -81,13 +85,26 @@ public class CalendarFragment extends Fragment {
         calendar = (CalendarView) root.findViewById(R.id.calendarView);
         calendar.setMinDate(System.currentTimeMillis() - 1000);
 
-        ArrayList<Booking> dbBooking = new ArrayList<>();
 
         //TODO: add database pulled bookings here....
         // will need to filter by current date and machine...
         // repeat this process when date changes onClick below...
+        db.collection("bookings").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if(!queryDocumentSnapshots.isEmpty()){
+                            List<DocumentSnapshot> tempBookings = queryDocumentSnapshots.getDocuments();
 
-        dbBooking.add(new Booking(1,12, 00, "12/07/2020"));
+                            for (DocumentSnapshot d: tempBookings){
+                                Booking pulledBooking = d.toObject(Booking.class);
+                                dbBooking.add(pulledBooking);
+                            }
+                            bookingAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
 
         bookingRecyclerView = root.findViewById(R.id.bookings);
         bookingLayoutManager = new LinearLayoutManager(getContext());

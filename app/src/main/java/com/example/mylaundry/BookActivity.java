@@ -46,6 +46,8 @@ public class BookActivity extends AppCompatActivity {
     private RecyclerView bookingRecyclerView;
     private RecyclerView.Adapter bookingAdapter;
     private RecyclerView.LayoutManager bookingLayoutManager;
+    private ArrayList<Booking> dbBooking = new ArrayList<>();
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -53,7 +55,6 @@ public class BookActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
-        final ArrayList<Booking> dbBooking = new ArrayList<>();
 
         //TODO: add database pulled bookings here....
         // will need to filter by current date and machine...

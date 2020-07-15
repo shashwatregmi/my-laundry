@@ -1,6 +1,8 @@
 # MyLaundry
 
-
+<p align="center">
+<img src="GitHub%20Images/my_laundry.png" width="200" height="200">
+</p>
 [IN DEVELOPMENT] Communal laundry made easy!
 
 

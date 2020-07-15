@@ -121,7 +121,18 @@ public class CalendarFragment extends Fragment {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 // TODO: we need to display the bookings for this day here by pulling from db..
-                String temp = dayOfMonth + "/" + (month + 1) + "/" + year;
+                String temp = "";
+                if (dayOfMonth >= 1 && dayOfMonth <= 9){
+                    temp = "0" + dayOfMonth;
+                } else {
+                    temp = String.valueOf(dayOfMonth);
+                }
+
+                if (month >= 0 && month < 9){
+                    temp = temp + "/0" + (month + 1) + "/" + year;
+                } else{
+                    temp = temp + "/" + (month + 1) + "/" + year;
+                }
                 todayView.setText(temp);
             }
         });

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
@@ -16,8 +15,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -46,7 +43,7 @@ public class BookActivity extends AppCompatActivity {
     private RecyclerView bookingRecyclerView;
     private RecyclerView.Adapter bookingAdapter;
     private RecyclerView.LayoutManager bookingLayoutManager;
-    private ArrayList<Booking> dbBooking = new ArrayList<>();
+    private ArrayList<Booking> dbBookingList = new ArrayList<>();
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -74,7 +71,7 @@ public class BookActivity extends AppCompatActivity {
                             for (DocumentSnapshot d: tempBookings){
                                 Booking pulledBooking = d.toObject(Booking.class);
                                 if (pulledBooking.getDate().equals(TODAY) && pulledBooking.getWasher() == washerNumber){
-                                    dbBooking.add(pulledBooking);
+                                    dbBookingList.add(pulledBooking);
                                 }
                             }
                             bookingAdapter.notifyDataSetChanged();
@@ -84,7 +81,7 @@ public class BookActivity extends AppCompatActivity {
 
         bookingRecyclerView = findViewById(R.id.bookings);
         bookingLayoutManager = new LinearLayoutManager(this);
-        bookingAdapter = new BookItemAdapter(dbBooking);
+        bookingAdapter = new BookItemAdapter(dbBookingList);
 
         bookingRecyclerView.setLayoutManager(bookingLayoutManager);
         bookingRecyclerView.setAdapter(bookingAdapter);
@@ -160,6 +157,8 @@ public class BookActivity extends AppCompatActivity {
                                 Toast.makeText(BookActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         });
+                        dbBookingList.add(booking);
+                        bookingAdapter.notifyDataSetChanged();
                     }
                 }, timeNow.get(Calendar.HOUR_OF_DAY), timeNow.get(Calendar.MINUTE), false);
                 timePicker.show();

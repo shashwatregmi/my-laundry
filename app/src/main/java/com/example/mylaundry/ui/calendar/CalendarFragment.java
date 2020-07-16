@@ -3,7 +3,6 @@ package com.example.mylaundry.ui.calendar;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,16 +19,13 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mylaundry.BookActivity;
 import com.example.mylaundry.BookItemAdapter;
 import com.example.mylaundry.Booking;
 import com.example.mylaundry.R;
@@ -60,7 +56,7 @@ public class CalendarFragment extends Fragment {
     private RecyclerView bookingRecyclerView;
     private RecyclerView.Adapter bookingAdapter;
     private RecyclerView.LayoutManager bookingLayoutManager;
-    private ArrayList<Booking> dbBooking = new ArrayList<>();
+    private ArrayList<Booking> dbBookingList = new ArrayList<>();
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -99,7 +95,7 @@ public class CalendarFragment extends Fragment {
                             for (DocumentSnapshot d: tempBookings){
                                 Booking pulledBooking = d.toObject(Booking.class);
                                 if (pulledBooking.getDate().equals(TODAY) && pulledBooking.getWasher() == spinnerposition + 1){
-                                    dbBooking.add(pulledBooking);
+                                    dbBookingList.add(pulledBooking);
                                 }                            }
                             bookingAdapter.notifyDataSetChanged();
                         }
@@ -109,7 +105,7 @@ public class CalendarFragment extends Fragment {
 
         bookingRecyclerView = root.findViewById(R.id.bookings);
         bookingLayoutManager = new LinearLayoutManager(getContext());
-        bookingAdapter = new BookItemAdapter(dbBooking);
+        bookingAdapter = new BookItemAdapter(dbBookingList);
 
         bookingRecyclerView.setLayoutManager(bookingLayoutManager);
         bookingRecyclerView.setAdapter(bookingAdapter);
@@ -192,6 +188,8 @@ public class CalendarFragment extends Fragment {
                                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         });
+                        dbBookingList.add(booking);
+                        bookingAdapter.notifyDataSetChanged();
                     }
                 }, timeNow.get(Calendar.HOUR_OF_DAY), timeNow.get(Calendar.MINUTE), false);
                 timePicker.show();

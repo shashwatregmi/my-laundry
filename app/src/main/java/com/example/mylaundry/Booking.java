@@ -36,6 +36,9 @@ public class Booking {
         this.date = date;
     }
 
+    public void setDay(String day) {}
+    public void setMonth(String day) {}
+
     public int getWasher() {
         return washer;
     }

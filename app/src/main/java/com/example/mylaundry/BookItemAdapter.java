@@ -56,7 +56,6 @@ public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.BookVi
             if (booking.getHour() == 0 && booking.getEndHr() == 0) {
                 time = "00" + ":" + "00";
                 endtime = "00" + ":00";
-
             } else if (booking.getHour() != 0 && booking.getEndHr() == 0) {
                 time = booking.getHour() + ":" + "00";
                 endtime = "00" + ":00";
@@ -64,14 +63,27 @@ public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.BookVi
                 time = "00" + ":" + "00";
                 endtime = booking.getEndHr() + ":00";
             } else {
-                time = booking.getHour() + ":" + "00";
+                time = booking.getHour() + ":00";
+                endtime = booking.getEndHr() + ":00";
             }
-            endtime = booking.getEndHr() + ":00";
+        } else if (booking.getMinute() > 0 && booking.getMinute() < 10){
+            if (booking.getHour() == 0 && booking.getEndHr() == 0) {
+                time = "00" + ":" + booking.getMinute() + "0";
+                endtime = "00" + ":" + booking.getMinute() + "0";
+            } else if (booking.getHour() != 0 && booking.getEndHr() == 0) {
+                time = booking.getHour() + ":" + booking.getMinute() + "0";
+                endtime = "00" + ":" + booking.getMinute() + "0";
+            } else if (booking.getHour() == 0 && booking.getEndHr() != 0) {
+                time = "00" + ":" + booking.getMinute() + "0";
+                endtime = booking.getEndHr() + ":" + booking.getMinute() + "0";
+            } else {
+                time = booking.getHour() + ":" + booking.getMinute() + "0";
+                endtime = booking.getEndHr() + ":" + booking.getMinute() + "0";
+            }
         } else {
             if (booking.getHour() == 0 && booking.getEndHr() == 0) {
                 time = "00" + ":" + booking.getMinute();
                 endtime = "00" + ":" + booking.getMinute();
-
             } else if (booking.getHour() != 0 && booking.getEndHr() == 0) {
                 time = booking.getHour() + ":" + booking.getMinute();
                 endtime = "00" + ":" + booking.getMinute();
@@ -80,8 +92,8 @@ public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.BookVi
                 endtime = booking.getEndHr() + ":" + booking.getMinute();
             } else {
                 time = booking.getHour() + ":" + booking.getMinute();
+                endtime = booking.getEndHr() + ":" + booking.getMinute();
             }
-            endtime = booking.getEndHr() + ":" + booking.getMinute();
         }
 
         String displayTime = time + " to " + endtime;

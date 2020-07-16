@@ -143,7 +143,8 @@ public class BookActivity extends AppCompatActivity {
                         if (hourOfDay != 24){
                             bookingEnd = hourOfDay+1;
                         }
-                        Booking booking = new Booking(washerNumber, hourOfDay, minute, String.valueOf(todayView.getText()), bookingEnd);
+                        Booking booking = new Booking(washerNumber, hourOfDay, minute,
+                                String.valueOf(todayView.getText()), bookingEnd);
                         Boolean flagConflict = false;
                         for (Booking b : dbBookingList){
                             if ((b.getEndHr() == hourOfDay && b.getMinute() >= minute) || b.getHour() == hourOfDay){

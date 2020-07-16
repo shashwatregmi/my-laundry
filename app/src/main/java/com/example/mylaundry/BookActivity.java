@@ -145,10 +145,11 @@ public class BookActivity extends AppCompatActivity {
                         }
                         Booking booking = new Booking(washerNumber, hourOfDay, minute,
                                 String.valueOf(todayView.getText()), bookingEnd);
-                        Boolean flagConflict = false;
+                        boolean flagConflict = false;
                         for (Booking b : dbBookingList){
-                            if ((b.getEndHr() == hourOfDay && b.getMinute() >= minute) || b.getHour() == hourOfDay){
+                            if ((b.getEndHr() == hourOfDay && b.getMinute() >= minute) || b.getHour() == hourOfDay) {
                                 flagConflict = true;
+                                break;
                             }
                         }
 

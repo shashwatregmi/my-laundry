@@ -144,21 +144,34 @@ public class BookActivity extends AppCompatActivity {
                             bookingEnd = hourOfDay+1;
                         }
                         Booking booking = new Booking(washerNumber, hourOfDay, minute, String.valueOf(todayView.getText()), bookingEnd);
+                        Boolean flagConflict = false;
+                        for (Booking b : dbBookingList){
+                            if ((b.getEndHr() == hourOfDay && b.getMinute() >= minute) || b.getHour() == hourOfDay){
+                                flagConflict = true;
+                            }
+                        }
 
-                        dbBooking.add(booking)
-                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(BookActivity.this, "Code will be provided here", Toast.LENGTH_LONG).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(BookActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        });
-                        dbBookingList.add(booking);
-                        bookingAdapter.notifyDataSetChanged();
+                        if (!flagConflict){
+                            dbBooking.add(booking)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Toast.makeText(BookActivity.this, "Code will be provided here", Toast.LENGTH_LONG).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(BookActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            dbBookingList.add(booking);
+                            bookingAdapter.notifyDataSetChanged();
+                        } else {
+                            TimeConflictDialog conflictDialog = new TimeConflictDialog();
+                            conflictDialog.show(getSupportFragmentManager(), "Time Conflict Error");
+                            book.callOnClick();
+                        }
+
                     }
                 }, timeNow.get(Calendar.HOUR_OF_DAY), timeNow.get(Calendar.MINUTE), false);
                 timePicker.show();

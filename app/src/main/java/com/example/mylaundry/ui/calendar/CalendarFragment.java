@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mylaundry.BookItemAdapter;
 import com.example.mylaundry.Booking;
 import com.example.mylaundry.R;
+import com.example.mylaundry.TimeConflictDialog;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -175,21 +176,32 @@ public class CalendarFragment extends Fragment {
                             bookingEnd = hourOfDay+1;
                         }
                         Booking booking = new Booking(spinnerposition + 1, hourOfDay, minute, String.valueOf(todayView.getText()), bookingEnd);
-
-                        dbBooking.add(booking)
-                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        Toast.makeText(getContext(), "Code will be provided here", Toast.LENGTH_LONG).show();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        Boolean flagConflict = false;
+                        for (Booking b : dbBookingList){
+                            if ((b.getEndHr() == hourOfDay && b.getMinute() >= minute) || b.getHour() == hourOfDay){
+                                flagConflict = true;
                             }
-                        });
-                        dbBookingList.add(booking);
-                        bookingAdapter.notifyDataSetChanged();
+                        }
+                        if (!flagConflict) {
+                            dbBooking.add(booking)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Toast.makeText(getContext(), "Code will be provided here", Toast.LENGTH_LONG).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            dbBookingList.add(booking);
+                            bookingAdapter.notifyDataSetChanged();
+                        } else {
+                            TimeConflictDialog conflictDialog = new TimeConflictDialog();
+                            conflictDialog.show(getActivity().getSupportFragmentManager(), "Time Conflict Error");
+                            book.callOnClick();
+                        }
                     }
                 }, timeNow.get(Calendar.HOUR_OF_DAY), timeNow.get(Calendar.MINUTE), false);
                 timePicker.show();

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,11 +28,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class BookActivity extends AppCompatActivity {
 
     CalendarView calendar;
@@ -44,6 +47,8 @@ public class BookActivity extends AppCompatActivity {
     private RecyclerView.Adapter bookingAdapter;
     private RecyclerView.LayoutManager bookingLayoutManager;
     private ArrayList<Booking> dbBookingList = new ArrayList<>();
+    private Date currentTime = null;
+    private DateFormat timeFormat = new SimpleDateFormat("hh:mm");
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -57,6 +62,8 @@ public class BookActivity extends AppCompatActivity {
         TODAY = dateFormat.format(date);
         final Intent intent = getIntent();
         final int washerNumber = intent.getIntExtra("Number", 0);
+        getCurrentTime();
+
 
         //TODO: add database pulled bookings here....
         // will need to filter by current date and machine...
@@ -71,7 +78,15 @@ public class BookActivity extends AppCompatActivity {
                             for (DocumentSnapshot d: tempBookings){
                                 Booking pulledBooking = d.toObject(Booking.class);
                                 if (pulledBooking.getDate().equals(TODAY) && pulledBooking.getWasher() == washerNumber){
-                                    dbBookingList.add(pulledBooking);
+                                    Date bookingTime = null;
+                                    try {
+                                        bookingTime = timeFormat.parse(pulledBooking.getEndHr() + ":" + pulledBooking.getMinute());
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (bookingTime.after(currentTime)){
+                                        dbBookingList.add(pulledBooking);
+                                    }
                                 }
                             }
                             bookingAdapter.notifyDataSetChanged();
@@ -179,5 +194,15 @@ public class BookActivity extends AppCompatActivity {
                 timePicker.show();
             }
         });
+    }
+
+    private void getCurrentTime(){
+        currentTime = Calendar.getInstance().getTime();
+        String temp = timeFormat.format(currentTime);
+        try {
+            currentTime = timeFormat.parse(temp);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

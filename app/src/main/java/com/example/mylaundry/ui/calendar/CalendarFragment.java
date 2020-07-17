@@ -3,6 +3,7 @@ package com.example.mylaundry.ui.calendar;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.TimePickerDialog;
+import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,11 +39,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class CalendarFragment extends Fragment {
 
     CalendarView calendar;
@@ -58,7 +61,8 @@ public class CalendarFragment extends Fragment {
     private RecyclerView.Adapter bookingAdapter;
     private RecyclerView.LayoutManager bookingLayoutManager;
     private ArrayList<Booking> dbBookingList = new ArrayList<>();
-
+    private Date currentTime = null;
+    private DateFormat timeFormat = new SimpleDateFormat("hh:mm");
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -71,6 +75,8 @@ public class CalendarFragment extends Fragment {
         machineList.add("Washer #2");
         db = FirebaseFirestore.getInstance();
         //TODO: pull data from DB and place into this array list..
+
+        getCurrentTime();
 
         View root = inflater.inflate(R.layout.fragment_calendar, container, false);
         Spinner spinner = (Spinner) root.findViewById(R.id.spinner);
@@ -96,8 +102,17 @@ public class CalendarFragment extends Fragment {
                             for (DocumentSnapshot d: tempBookings){
                                 Booking pulledBooking = d.toObject(Booking.class);
                                 if (pulledBooking.getDate().equals(TODAY) && pulledBooking.getWasher() == spinnerposition + 1){
-                                    dbBookingList.add(pulledBooking);
-                                }                            }
+                                    Date bookingTime = null;
+                                    try {
+                                        bookingTime = timeFormat.parse(pulledBooking.getEndHr() + ":" + pulledBooking.getMinute());
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (bookingTime.after(currentTime)){
+                                        dbBookingList.add(pulledBooking);
+                                    }
+                                }
+                            }
                             bookingAdapter.notifyDataSetChanged();
                         }
                     }
@@ -214,5 +229,15 @@ public class CalendarFragment extends Fragment {
         }
 
         return root;
+    }
+
+    private void getCurrentTime(){
+        currentTime = Calendar.getInstance().getTime();
+        String temp = timeFormat.format(currentTime);
+        try {
+            currentTime = timeFormat.parse(temp);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

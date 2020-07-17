@@ -61,11 +61,13 @@
         app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/upcoming"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Upcoming Booking" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Previous Bookings" />
@@ -77,6 +79,7 @@
         android:layout_width="410dp"
         android:layout_height="449dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

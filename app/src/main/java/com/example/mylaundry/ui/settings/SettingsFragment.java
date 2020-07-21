@@ -2,6 +2,7 @@ package com.example.mylaundry.ui.settings;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -43,11 +45,15 @@ public class SettingsFragment extends Fragment {
     FirebaseFirestore db;
     private SettingsViewModel settingsViewModel;
     private MainActivity main;
+    private Date currentTime = null;
+    private DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         settingsViewModel =
                 ViewModelProviders.of(this).get(SettingsViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_settings, container, false);
+        getCurrentTime();
 
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -113,7 +119,17 @@ public class SettingsFragment extends Fragment {
                                 }
 
                                 if (bookingDate != null && !(bookingDate.before(todayDate))){ // TODO: user check here after implementing user authent.
-                                    dbBookingList.add(pulledBooking);
+                                    Date bookingTime = null;
+                                    try {
+                                        bookingTime = timeFormat.parse(pulledBooking.getEndHr() + ":" + pulledBooking.getMinute());
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (pulledBooking.getDate().equals(TODAY) && bookingTime.after(currentTime)){
+                                        dbBookingList.add(pulledBooking);
+                                    } else if (!pulledBooking.getDate().equals(TODAY)){
+                                        dbBookingList.add(pulledBooking);
+                                    }
                                 }                            }
                             bookingAdapter.notifyDataSetChanged();
                         }
@@ -156,9 +172,18 @@ public class SettingsFragment extends Fragment {
                                     e.printStackTrace();
                                 }
 
-                                if (bookingDate != null && (bookingDate.before(todayDate))){ // TODO: user check here after implementing user authent.
-                                    dbBookingList.add(pulledBooking);
-                                }                            }
+                                if (bookingDate != null && !(bookingDate.after(todayDate))){ // TODO: user check here after implementing user authent.
+                                    Date bookingTime = null;
+                                    try {
+                                        bookingTime = timeFormat.parse(pulledBooking.getEndHr() + ":" + pulledBooking.getMinute());
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (pulledBooking.getDate().equals(TODAY) && bookingTime.before(currentTime)){
+                                        dbBookingList.add(pulledBooking);
+                                    } else if (!pulledBooking.getDate().equals(TODAY)){
+                                        dbBookingList.add(pulledBooking);
+                                    }                                }                            }
                             bookingAdapter.notifyDataSetChanged();
                         }
                     }
@@ -171,5 +196,15 @@ public class SettingsFragment extends Fragment {
 
         bookingRecyclerView.setLayoutManager(bookingLayoutManager);
         bookingRecyclerView.setAdapter(bookingAdapter);
+    }
+
+    private void getCurrentTime(){
+        currentTime = Calendar.getInstance().getTime();
+        String temp = timeFormat.format(currentTime);
+        try {
+            currentTime = timeFormat.parse(temp);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

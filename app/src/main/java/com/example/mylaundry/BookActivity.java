@@ -84,8 +84,6 @@ public class BookActivity extends AppCompatActivity {
                                     } catch (ParseException e) {
                                         e.printStackTrace();
                                     }
-                                    System.out.println(bookingTime + "booked");
-                                    System.out.println(currentTime + "curr");
                                     if (bookingTime.after(currentTime)){
                                         dbBookingList.add(pulledBooking);
                                     }

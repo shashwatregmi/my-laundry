@@ -17,4 +17,9 @@
 <img src="GitHub%20Images/booking_main.png" width="232" height="490" hspace="20">
 <img src="GitHub%20Images/booking_time.png" width="232" height="490" hspace="20">
 </p>
+
+<p align="center">
+<img src="GitHub%20Images/calendar.png" width="232" height="490" hspace="20">
+<img src="GitHub%20Images/user.png" width="232" height="490" hspace="20">
+</p>
  

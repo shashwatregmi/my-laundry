@@ -24,7 +24,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="/private/var/folders/ly/gq7pf46s3yxbl4qlvw1vk_7h0000gn/T/baseline_local_laundry_service_24.xml" />
+                                                <entry key="imagePath" value="/private/var/folders/ly/gq7pf46s3yxbl4qlvw1vk_7h0000gn/T/baseline_account_circle_24.xml" />
                                                 <entry key="opacityPercent" value="80" />
                                                 <entry key="paddingPercent" value="-5" />
                                               </map>
@@ -37,7 +37,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material/icons/materialicons/local_laundry_service/baseline_local_laundry_service_24.xml" />
+                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material/icons/materialicons/account_circle/baseline_account_circle_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -83,9 +83,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="imageAsset" value="$USER_HOME$/Downloads/calendar.png" />
-                                      <entry key="outputName" value="splash" />
+                                      <entry key="outputName" value="settings" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="1979a9" />
+                                      <entry key="themeColor" value="000000" />
                                     </map>
                                   </option>
                                 </PersistentState>

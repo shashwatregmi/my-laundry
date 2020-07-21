@@ -2,7 +2,7 @@
     <string name="app_name">MyLaundry</string>
     <string name="title_home">Home</string>
     <string name="title_calendar">Calendar</string>
-    <string name="title_settings">Settings</string>
+    <string name="title_settings">My Account</string>
     <string name="todo">TODO</string>
     <string name="padding">Padding</string>
     <string name="textview">TextView</string>

@@ -48,7 +48,7 @@ public class BookActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager bookingLayoutManager;
     private ArrayList<Booking> dbBookingList = new ArrayList<>();
     private Date currentTime = null;
-    private DateFormat timeFormat = new SimpleDateFormat("hh:mm");
+    private DateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -84,6 +84,8 @@ public class BookActivity extends AppCompatActivity {
                                     } catch (ParseException e) {
                                         e.printStackTrace();
                                     }
+                                    System.out.println(bookingTime + "booked");
+                                    System.out.println(currentTime + "curr");
                                     if (bookingTime.after(currentTime)){
                                         dbBookingList.add(pulledBooking);
                                     }

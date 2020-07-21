@@ -62,7 +62,7 @@ public class CalendarFragment extends Fragment {
     private RecyclerView.LayoutManager bookingLayoutManager;
     private ArrayList<Booking> dbBookingList = new ArrayList<>();
     private Date currentTime = null;
-    private DateFormat timeFormat = new SimpleDateFormat("hh:mm");
+    private DateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,

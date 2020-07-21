@@ -7,8 +7,11 @@ import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -35,7 +38,7 @@ import java.util.Date;
 import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment{
     private RecyclerView bookingRecyclerView;
     private RecyclerView.Adapter bookingAdapter;
     private RecyclerView.LayoutManager bookingLayoutManager;
@@ -48,6 +51,7 @@ public class SettingsFragment extends Fragment {
     private Date currentTime = null;
     private DateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
+    @SuppressLint("ResourceType")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         settingsViewModel =
@@ -61,8 +65,9 @@ public class SettingsFragment extends Fragment {
         TODAY = dateFormat.format(date);
         db = FirebaseFirestore.getInstance();
         bookingsTab = root.findViewById(R.id.tabLayout);
-
         getUpcomingBookings(root);
+
+        handlePopup(root);
 
         bookingsTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -207,4 +212,34 @@ public class SettingsFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+    private void handlePopup(View root){
+        final ImageButton imgButton = (ImageButton) root.findViewById(R.id.settingsButton);
+        imgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(getActivity(), imgButton);
+                popup.getMenuInflater().inflate(R.menu.popup_user_menu, popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch(item.getItemId()){
+                            case R.id.profile:
+                                //TODO: open a new activity
+                                return true;
+                            case R.id.logout:
+                                //TODO: logout this user
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popup.show();
+            }
+        });
+
+    }
+
 }

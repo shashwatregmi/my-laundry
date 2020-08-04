@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,15 @@ import java.util.ArrayList;
 public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.BookViewHolder> {
 
     private ArrayList<Booking> bookings;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
 
     public static class BookViewHolder extends RecyclerView.ViewHolder{
 
@@ -22,12 +32,21 @@ public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.BookVi
         public TextView timeView;
         public TextView washerView;
 
-        public BookViewHolder(@NonNull View itemView) {
+        public BookViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             dayView = itemView.findViewById(R.id.dayView);
             monthView = itemView.findViewById(R.id.monthView);
             timeView = itemView.findViewById(R.id.timeView);
             washerView = itemView.findViewById(R.id.washerView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) listener.onItemClick(position);
+                    }
+                }
+            });
         }
     }
 
@@ -39,7 +58,7 @@ public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.BookVi
     @Override
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.bookedbookinglistitem, parent, false);
-        BookViewHolder bvh = new BookViewHolder(v);
+        BookViewHolder bvh = new BookViewHolder(v, listener);
         return bvh;
     }
 
@@ -51,52 +70,6 @@ public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.BookVi
         holder.monthView.setText(booking.getMonth());
         String time;
         String endtime;
-
-
-
-//        if (booking.getMinute() == 0) {
-//            if (booking.getHour() == 0 && booking.getEndHr() == 0) {
-//                time = "00" + ":" + "00";
-//                endtime = "00" + ":00";
-//            } else if (booking.getHour() != 0 && booking.getEndHr() == 0) {
-//                time = booking.getHour() + ":" + "00";
-//                endtime = "00" + ":00";
-//            } else if (booking.getHour() == 0 && booking.getEndHr() != 0) {
-//                time = "00" + ":" + "00";
-//                endtime = booking.getEndHr() + ":00";
-//            } else {
-//                time = booking.getHour() + ":00";
-//                endtime = booking.getEndHr() + ":00";
-//            }
-//        } else if (booking.getMinute() > 0 && booking.getMinute() < 10){
-//            if (booking.getHour() == 0 && booking.getEndHr() == 0) {
-//                time = "00" + ":" + booking.getMinute() + "0";
-//                endtime = "00" + ":" + booking.getMinute() + "0";
-//            } else if (booking.getHour() != 0 && booking.getEndHr() == 0) {
-//                time = booking.getHour() + ":" + booking.getMinute() + "0";
-//                endtime = "00" + ":" + booking.getMinute() + "0";
-//            } else if (booking.getHour() == 0 && booking.getEndHr() != 0) {
-//                time = "00" + ":" + booking.getMinute() + "0";
-//                endtime = booking.getEndHr() + ":" + booking.getMinute() + "0";
-//            } else {
-//                time = booking.getHour() + ":" + booking.getMinute() + "0";
-//                endtime = booking.getEndHr() + ":" + booking.getMinute() + "0";
-//            }
-//        } else {
-//            if (booking.getHour() == 0 && booking.getEndHr() == 0) {
-//                time = "00" + ":" + booking.getMinute();
-//                endtime = "00" + ":" + booking.getMinute();
-//            } else if (booking.getHour() != 0 && booking.getEndHr() == 0) {
-//                time = booking.getHour() + ":" + booking.getMinute();
-//                endtime = "00" + ":" + booking.getMinute();
-//            } else if (booking.getHour() == 0 && booking.getEndHr() != 0) {
-//                time = "00" + ":" + booking.getMinute();
-//                endtime = booking.getEndHr() + ":" + booking.getMinute();
-//            } else {
-//                time = booking.getHour() + ":" + booking.getMinute();
-//                endtime = booking.getEndHr() + ":" + booking.getMinute();
-//            }
-//        }
 
         time = String.format("%02d:%02d", booking.getHour(), booking.getMinute());
         endtime = String.format("%02d:%02d", booking.getEndHr(), booking.getMinute());
@@ -110,4 +83,5 @@ public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.BookVi
     public int getItemCount() {
         return bookings.size();
     }
+
 }

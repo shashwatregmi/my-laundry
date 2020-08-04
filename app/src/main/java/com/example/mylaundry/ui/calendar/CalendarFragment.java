@@ -3,6 +3,7 @@ package com.example.mylaundry.ui.calendar;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
@@ -27,8 +28,10 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mylaundry.BookActivity;
 import com.example.mylaundry.BookItemAdapter;
 import com.example.mylaundry.Booking;
+import com.example.mylaundry.MachineListAdapter;
 import com.example.mylaundry.R;
 import com.example.mylaundry.TimeConflictDialog;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -98,7 +101,6 @@ public class CalendarFragment extends Fragment {
         bookingRecyclerView.setLayoutManager(bookingLayoutManager);
         bookingRecyclerView.setAdapter(bookingAdapter);
 
-
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         TODAY = dateFormat.format(date);
@@ -120,6 +122,8 @@ public class CalendarFragment extends Fragment {
             }
 
         });
+
+
 
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override

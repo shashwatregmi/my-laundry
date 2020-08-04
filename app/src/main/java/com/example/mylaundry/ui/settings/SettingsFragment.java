@@ -2,6 +2,7 @@ package com.example.mylaundry.ui.settings;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -21,8 +23,10 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mylaundry.BookActivity;
 import com.example.mylaundry.BookItemAdapter;
 import com.example.mylaundry.Booking;
+import com.example.mylaundry.MachineListAdapter;
 import com.example.mylaundry.MainActivity;
 import com.example.mylaundry.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,7 +44,7 @@ import java.util.List;
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class SettingsFragment extends Fragment{
     private RecyclerView bookingRecyclerView;
-    private RecyclerView.Adapter bookingAdapter;
+    private BookItemAdapter bookingAdapter;
     private RecyclerView.LayoutManager bookingLayoutManager;
     private TabLayout bookingsTab;
     private ArrayList<Booking> dbBookingList = new ArrayList<>();
@@ -87,6 +91,13 @@ public class SettingsFragment extends Fragment{
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+
+        bookingAdapter.setOnItemClickListener(new BookItemAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(getContext(), "Code will be provided here", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -2,6 +2,8 @@ package com.example.mylaundry.ui.settings;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -94,12 +97,7 @@ public class SettingsFragment extends Fragment{
             }
         });
 
-        bookingAdapter.setOnItemClickListener(new BookItemAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Toast.makeText(getContext(), "Code will be provided here", Toast.LENGTH_LONG).show();
-            }
-        });
+        handleClick();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ((Activity) root.getContext()).getWindow().setStatusBarColor(ContextCompat.getColor(root.getContext(), R.color.colorAccent));
@@ -159,6 +157,7 @@ public class SettingsFragment extends Fragment{
 
         bookingRecyclerView.setLayoutManager(bookingLayoutManager);
         bookingRecyclerView.setAdapter(bookingAdapter);
+        handleClick();
     }
 
     private void getPreviousBookings(View root){
@@ -251,6 +250,39 @@ public class SettingsFragment extends Fragment{
             }
         });
 
+    }
+
+    private void handleClick(){
+        bookingAdapter.setOnItemClickListener(new BookItemAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                AlertDialog dialog = new AlertDialog.Builder(getContext())
+                        .setTitle("test")
+                        .setMessage("msg")
+                        .setPositiveButton("code", null)
+                        .setNeutralButton("del", null)
+                        .setNegativeButton("neg", null)
+                        .setCancelable(false)
+                        .show();
+
+                Button codeBtn = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                codeBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+                Button delBtn = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                codeBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+            }
+        });
     }
 
 }

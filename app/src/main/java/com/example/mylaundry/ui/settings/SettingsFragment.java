@@ -9,6 +9,7 @@ import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +33,7 @@ import com.example.mylaundry.Booking;
 import com.example.mylaundry.MachineListAdapter;
 import com.example.mylaundry.MainActivity;
 import com.example.mylaundry.R;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -97,7 +99,7 @@ public class SettingsFragment extends Fragment{
             }
         });
 
-        handleClick();
+        handleClick(root);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ((Activity) root.getContext()).getWindow().setStatusBarColor(ContextCompat.getColor(root.getContext(), R.color.colorAccent));
@@ -125,6 +127,7 @@ public class SettingsFragment extends Fragment{
 
                             for (DocumentSnapshot d: tempBookings){
                                 Booking pulledBooking = d.toObject(Booking.class);
+                                pulledBooking.setId(d.getId());
                                 try {
                                     @SuppressLint("SimpleDateFormat") SimpleDateFormat bookFormat = new SimpleDateFormat("dd/MM/yyyy");
                                     bookingDate = bookFormat.parse(pulledBooking.getDate());
@@ -157,7 +160,7 @@ public class SettingsFragment extends Fragment{
 
         bookingRecyclerView.setLayoutManager(bookingLayoutManager);
         bookingRecyclerView.setAdapter(bookingAdapter);
-        handleClick();
+        handleClick(root);
     }
 
     private void getPreviousBookings(View root){
@@ -252,11 +255,11 @@ public class SettingsFragment extends Fragment{
 
     }
 
-    private void handleClick(){
+    private void handleClick(final View root){
         bookingAdapter.setOnItemClickListener(new BookItemAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
-                AlertDialog dialog = new AlertDialog.Builder(getContext())
+            public void onItemClick(final int position) {
+                final AlertDialog dialog = new AlertDialog.Builder(getContext())
                         .setTitle("Alert")
                         .setMessage("Would you like to view the booking pin-code or delete this booking?")
                         .setPositiveButton("View Pin-Code", null)
@@ -276,10 +279,26 @@ public class SettingsFragment extends Fragment{
                 });
 
                 Button delBtn = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-                codeBtn.setOnClickListener(new View.OnClickListener() {
+                delBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        String id = dbBookingList.get(position).getId();
+                        db.collection("bookings").document(id).delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(getContext(), "Successfully Deleted", Toast.LENGTH_LONG).show();
+                                        getUpcomingBookings(root);
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(getContext(), "Error", Toast.LENGTH_LONG).show();
+                                        dialog.dismiss();
+                                    }
+                                });
                     }
                 });
 

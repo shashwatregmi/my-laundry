@@ -3,7 +3,7 @@ package com.example.mylaundry;
 public class Booking {
 
     int washer, hour, minute, endhr;
-    String date;
+    String date, id;
 
 
     public Booking(int washer, int hour, int minute, String date, int endhr){
@@ -38,6 +38,10 @@ public class Booking {
 
     public void setDay(String day) {}
     public void setMonth(String day) {}
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public int getWasher() {
         return washer;
@@ -92,6 +96,10 @@ public class Booking {
                 return "Dec";
         }
         return null;
+    }
+
+    public String getId() {
+        return id;
     }
 
 }

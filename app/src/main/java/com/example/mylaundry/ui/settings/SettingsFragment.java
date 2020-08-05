@@ -257,13 +257,15 @@ public class SettingsFragment extends Fragment{
             @Override
             public void onItemClick(int position) {
                 AlertDialog dialog = new AlertDialog.Builder(getContext())
-                        .setTitle("test")
-                        .setMessage("msg")
-                        .setPositiveButton("code", null)
-                        .setNeutralButton("del", null)
-                        .setNegativeButton("neg", null)
+                        .setTitle("Alert")
+                        .setMessage("Would you like to view the booking pin-code or delete this booking?")
+                        .setPositiveButton("View Pin-Code", null)
+                        .setNegativeButton("Delete Booking", null)
+                        .setNeutralButton("Cancel", null)
                         .setCancelable(false)
-                        .show();
+                        .create();
+
+                dialog.show();
 
                 Button codeBtn = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
                 codeBtn.setOnClickListener(new View.OnClickListener() {
@@ -273,7 +275,7 @@ public class SettingsFragment extends Fragment{
                     }
                 });
 
-                Button delBtn = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                Button delBtn = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
                 codeBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

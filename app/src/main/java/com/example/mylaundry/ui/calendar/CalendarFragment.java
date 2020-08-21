@@ -45,6 +45,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -91,7 +93,7 @@ public class CalendarFragment extends Fragment {
         calendar = (CalendarView) root.findViewById(R.id.calendarView);
         calendar.setMinDate(System.currentTimeMillis() - 1000);
 
-        
+
         bookingRecyclerView = root.findViewById(R.id.bookings);
         bookingLayoutManager = new LinearLayoutManager(getContext());
         bookingAdapter = new BookItemAdapter(dbBookingList);
@@ -242,6 +244,16 @@ public class CalendarFragment extends Fragment {
                                     }
                                 }
                             }
+                            Collections.sort(dbBookingList, new Comparator<Booking>(){
+                                public int compare(Booking b1, Booking b2)
+                                {
+                                    if (b1.getHour() > (b2.getHour())) {
+                                        return 1;
+                                    } else {
+                                        return -1;
+                                    }
+                                }
+                            });
                             bookingAdapter.notifyDataSetChanged();
                         }
                     }

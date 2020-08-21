@@ -31,6 +31,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -89,6 +91,7 @@ public class BookActivity extends AppCompatActivity {
                                     }
                                 }
                             }
+                            sort();
                             bookingAdapter.notifyDataSetChanged();
                         }
                     }
@@ -182,6 +185,7 @@ public class BookActivity extends AppCompatActivity {
                                 }
                             });
                             dbBookingList.add(booking);
+                            sort();
                             bookingAdapter.notifyDataSetChanged();
                         } else {
                             TimeConflictDialog conflictDialog = new TimeConflictDialog();
@@ -204,5 +208,18 @@ public class BookActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    private void sort(){
+        Collections.sort(dbBookingList, new Comparator<Booking>(){
+            public int compare(Booking b1, Booking b2)
+            {
+                if (b1.getHour() > (b2.getHour())) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        });
     }
 }

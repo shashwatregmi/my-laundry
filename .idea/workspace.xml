@@ -15,7 +15,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1a4eed9b-d192-4fab-a6e6-dae74817f2bd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/ui/calendar/CalendarFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/ui/calendar/CalendarFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/BookActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/BookActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

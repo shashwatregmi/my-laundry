@@ -28,6 +28,6 @@
 
 <p align="center">
 <img src="GitHub%20Images/user.png" width="232" height="490" hspace="20">
-<img src="GitHub%20Images/user_prev.png" width="232" height="490" hspace="20">
+<img src="GitHub%20Images/user_click.png" width="232" height="490" hspace="20">
 </p>
  

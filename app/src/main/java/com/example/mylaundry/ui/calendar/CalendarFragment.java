@@ -3,7 +3,6 @@ package com.example.mylaundry.ui.calendar;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
@@ -28,10 +27,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mylaundry.BookActivity;
 import com.example.mylaundry.BookItemAdapter;
 import com.example.mylaundry.Booking;
-import com.example.mylaundry.MachineListAdapter;
 import com.example.mylaundry.R;
 import com.example.mylaundry.TimeConflictDialog;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -79,7 +76,6 @@ public class CalendarFragment extends Fragment {
         machineList.add("Washer #1");
         machineList.add("Washer #2");
         db = FirebaseFirestore.getInstance();
-        //TODO: pull data from DB and place into this array list..
 
         getCurrentTime();
 
@@ -113,7 +109,7 @@ public class CalendarFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parentView, View view, int position, long id) {
                 spinnerposition = position;
                 dbBookingList.clear();
-                pullTodayBookings();
+                pullBookings(TODAY);
             }
 
             @Override
@@ -142,6 +138,9 @@ public class CalendarFragment extends Fragment {
                     temp = temp + "/" + (month + 1) + "/" + year;
                 }
                 todayView.setText(temp);
+                dbBookingList.clear();
+                bookingAdapter.notifyDataSetChanged();
+                pullBookings(temp);
             }
         });
 
@@ -151,7 +150,9 @@ public class CalendarFragment extends Fragment {
             public void onClick(View v) {
                 calendar.setDate(System.currentTimeMillis());
                 todayView.setText(TODAY);
-                // TODO: need to update the bookings for today date on list now.
+                dbBookingList.clear();
+                bookingAdapter.notifyDataSetChanged();
+                pullBookings(TODAY);
             }
         });
 
@@ -220,10 +221,7 @@ public class CalendarFragment extends Fragment {
         }
     }
 
-    private void pullTodayBookings(){
-        //TODO: add database pulled bookings here....
-        // will need to filter by current date and machine...
-        // repeat this process when date changes onClick below...
+    private void pullBookings(final String date){
         db.collection("bookings").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -233,7 +231,7 @@ public class CalendarFragment extends Fragment {
 
                             for (DocumentSnapshot d: tempBookings) {
                                 Booking pulledBooking = d.toObject(Booking.class);
-                                if (pulledBooking.getDate().equals(TODAY) && pulledBooking.getWasher() == spinnerposition + 1) {
+                                if (pulledBooking.getDate().equals(date) && pulledBooking.getWasher() == spinnerposition + 1) {
                                     Date bookingTime = null;
                                     try {
                                         bookingTime = timeFormat.parse(pulledBooking.getEndHr() + ":" + pulledBooking.getMinute());

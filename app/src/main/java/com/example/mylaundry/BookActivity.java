@@ -120,6 +120,8 @@ public class BookActivity extends AppCompatActivity {
             public void onClick(View v) {
                 calendar.setDate(System.currentTimeMillis());
                 todayView.setText(TODAY);
+                dbBookingList.clear();
+                bookingAdapter.notifyDataSetChanged();
                 pullData(TODAY, washerNumber);
             }
         });

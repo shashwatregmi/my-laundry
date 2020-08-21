@@ -190,6 +190,7 @@ public class CalendarFragment extends Fragment {
                                 }
                             });
                             dbBookingList.add(booking);
+                            sort();
                             bookingAdapter.notifyDataSetChanged();
                         } else {
                             TimeConflictDialog conflictDialog = new TimeConflictDialog();
@@ -230,33 +231,38 @@ public class CalendarFragment extends Fragment {
                         if(!queryDocumentSnapshots.isEmpty()){
                             List<DocumentSnapshot> tempBookings = queryDocumentSnapshots.getDocuments();
 
-                            for (DocumentSnapshot d: tempBookings){
+                            for (DocumentSnapshot d: tempBookings) {
                                 Booking pulledBooking = d.toObject(Booking.class);
-                                if (pulledBooking.getDate().equals(TODAY) && pulledBooking.getWasher() == spinnerposition + 1){
+                                if (pulledBooking.getDate().equals(TODAY) && pulledBooking.getWasher() == spinnerposition + 1) {
                                     Date bookingTime = null;
                                     try {
                                         bookingTime = timeFormat.parse(pulledBooking.getEndHr() + ":" + pulledBooking.getMinute());
                                     } catch (ParseException e) {
                                         e.printStackTrace();
                                     }
-                                    if (bookingTime.after(currentTime)){
+                                    if (bookingTime.after(currentTime)) {
                                         dbBookingList.add(pulledBooking);
                                     }
                                 }
                             }
-                            Collections.sort(dbBookingList, new Comparator<Booking>(){
-                                public int compare(Booking b1, Booking b2)
-                                {
-                                    if (b1.getHour() > (b2.getHour())) {
-                                        return 1;
-                                    } else {
-                                        return -1;
-                                    }
-                                }
-                            });
+                            sort();
                             bookingAdapter.notifyDataSetChanged();
                         }
                     }
                 });
     }
+
+    private void sort(){
+        Collections.sort(dbBookingList, new Comparator<Booking>(){
+            public int compare(Booking b1, Booking b2)
+            {
+                if (b1.getHour() > (b2.getHour())) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        });
+    }
 }
+

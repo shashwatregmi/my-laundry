@@ -91,9 +91,7 @@ public class CalendarFragment extends Fragment {
         calendar = (CalendarView) root.findViewById(R.id.calendarView);
         calendar.setMinDate(System.currentTimeMillis() - 1000);
 
-
-        pullTodayBookings();
-
+        
         bookingRecyclerView = root.findViewById(R.id.bookings);
         bookingLayoutManager = new LinearLayoutManager(getContext());
         bookingAdapter = new BookItemAdapter(dbBookingList);

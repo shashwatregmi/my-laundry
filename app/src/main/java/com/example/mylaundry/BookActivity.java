@@ -147,7 +147,7 @@ public class BookActivity extends AppCompatActivity {
                         SecureRandom random = new SecureRandom();
                         pinCode = random.nextInt(100000);
                         final Booking booking = new Booking(washerNumber, hourOfDay, minute,
-                                String.valueOf(todayView.getText()), bookingEnd);
+                                String.valueOf(todayView.getText()), bookingEnd, pinCode);
                         boolean flagConflict = false;
                         for (Booking b : dbBookingList){
                             if ((b.getEndHr() == hourOfDay && b.getMinute() >= minute) || b.getHour() == hourOfDay) {

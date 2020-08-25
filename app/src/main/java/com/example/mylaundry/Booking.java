@@ -2,16 +2,17 @@ package com.example.mylaundry;
 
 public class Booking {
 
-    int washer, hour, minute, endhr;
+    int washer, hour, minute, endhr, pinCode;
     String date, id;
 
 
-    public Booking(int washer, int hour, int minute, String date, int endhr){
+    public Booking(int washer, int hour, int minute, String date, int endhr, int pinCode){
         this.washer = washer;
         this.hour = hour;
         this.minute = minute;
         this.date = date;
         this.endhr = endhr;
+        this.pinCode = pinCode;
     }
 
     public Booking(){}
@@ -41,6 +42,10 @@ public class Booking {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setPinCode(int pinCode) {
+        this.pinCode = pinCode;
     }
 
     public int getWasher() {
@@ -101,5 +106,10 @@ public class Booking {
     public String getId() {
         return id;
     }
+
+    public int getPinCode() {
+        return pinCode;
+    }
+
 
 }

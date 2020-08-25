@@ -2,7 +2,9 @@ package com.example.mylaundry.ui.calendar;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
@@ -27,6 +29,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mylaundry.BookActivity;
 import com.example.mylaundry.BookItemAdapter;
 import com.example.mylaundry.Booking;
 import com.example.mylaundry.R;
@@ -39,6 +42,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.security.SecureRandom;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -164,12 +168,15 @@ public class CalendarFragment extends Fragment {
                 TimePickerDialog timePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        final int pinCode;
                         CollectionReference dbBooking = db.collection("bookings");
                         int bookingEnd = 0;
                         if (hourOfDay != 24){
                             bookingEnd = hourOfDay+1;
                         }
-                        Booking booking = new Booking(spinnerposition + 1, hourOfDay, minute, String.valueOf(todayView.getText()), bookingEnd);
+                        SecureRandom random = new SecureRandom();
+                        pinCode = random.nextInt(100000);
+                        final Booking booking = new Booking(spinnerposition + 1, hourOfDay, minute, String.valueOf(todayView.getText()), bookingEnd, pinCode);
                         boolean flagConflict = false;
                         for (Booking b : dbBookingList){
                             if ((b.getEndHr() == hourOfDay && b.getMinute() >= minute) || b.getHour() == hourOfDay) {
@@ -182,7 +189,19 @@ public class CalendarFragment extends Fragment {
                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(getContext(), "Code will be provided here", Toast.LENGTH_LONG).show();
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                            builder.setCancelable(false);
+                                            builder.setMessage("Washer #" + booking.getWasher() + " has been successfully booked for 1 hour starting " +
+                                                    String.format("%02d:%02d", booking.getHour(), booking.getMinute()) + " on " + booking.getDate() +
+                                                    ".\n\n" + "Your pin-code is " + pinCode);
+                                            builder.setTitle("Successfully Booked!");
+                                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+
+                                                }
+                                            });
+                                            builder.show();
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override

@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
@@ -28,6 +30,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.security.SecureRandom;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,6 +38,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class BookActivity extends AppCompatActivity {
@@ -134,12 +138,15 @@ public class BookActivity extends AppCompatActivity {
                 TimePickerDialog timePicker = new TimePickerDialog(BookActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        final int pinCode;
                         CollectionReference dbBooking = db.collection("bookings");
                         int bookingEnd = 0;
                         if (hourOfDay != 24){
                             bookingEnd = hourOfDay+1;
                         }
-                        Booking booking = new Booking(washerNumber, hourOfDay, minute,
+                        SecureRandom random = new SecureRandom();
+                        pinCode = random.nextInt(100000);
+                        final Booking booking = new Booking(washerNumber, hourOfDay, minute,
                                 String.valueOf(todayView.getText()), bookingEnd);
                         boolean flagConflict = false;
                         for (Booking b : dbBookingList){
@@ -152,9 +159,22 @@ public class BookActivity extends AppCompatActivity {
                         if (!flagConflict){
                             dbBooking.add(booking)
                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @SuppressLint("DefaultLocale")
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(BookActivity.this, "Code will be provided here", Toast.LENGTH_LONG).show();
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(BookActivity.this);
+                                            builder.setCancelable(false);
+                                            builder.setMessage("Washer #" + booking.getWasher() + " has been successfully booked for 1 hour starting " +
+                                                    String.format("%02d:%02d", booking.getHour(), booking.getMinute()) + " on " + booking.getDate() +
+                                                    ".\n\n" + "Your pin-code is " + pinCode);
+                                            builder.setTitle("Successfully Booked!");
+                                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+
+                                                }
+                                            });
+                                            builder.show();
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override

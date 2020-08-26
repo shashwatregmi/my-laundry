@@ -274,7 +274,17 @@ public class SettingsFragment extends Fragment{
                 codeBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setCancelable(false);
+                        builder.setMessage("The pin-code for this booking is " + dbBookingList.get(position).getPinCode());
+                        builder.setTitle("Pin-code");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface thisDialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        builder.show();
                     }
                 });
 

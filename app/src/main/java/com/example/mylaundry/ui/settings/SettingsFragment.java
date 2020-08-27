@@ -152,7 +152,7 @@ public class SettingsFragment extends Fragment{
                                     }
                                 }
                             }
-                            sort();
+                            sort(0);
                             bookingAdapter.notifyDataSetChanged();
                         }
                     }
@@ -214,7 +214,7 @@ public class SettingsFragment extends Fragment{
                                     }
                                 }
                             }
-                            sort();
+                            sort(1);
                             bookingAdapter.notifyDataSetChanged();
                         }
                     }
@@ -329,11 +329,10 @@ public class SettingsFragment extends Fragment{
         });
     }
 
-    private void sort(){
+    private void sort(final int tab){
         Collections.sort(dbBookingList, new Comparator<Booking>(){
-            public int compare(Booking b1, Booking b2)
-            {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            public int compare(Booking b1, Booking b2) {
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 Date b1Date = null;
                 Date b2Date = null;
 
@@ -348,27 +347,47 @@ public class SettingsFragment extends Fragment{
                     e.printStackTrace();
                 }
 
-                if (b2Date.after(b1Date)) {
-                    return 1;
+                boolean dateComp = b2Date.equals(b1Date);
+
+                if (tab == 1){
+                    return sortPrev(b1, b2, b1Date, b2Date, dateComp);
                 } else {
-                    return -1;
+                    return sortUpcoming(b1, b2, b1Date, b2Date, dateComp);
                 }
             }
         });
     }
 
-//    private void sorthr(){
-//        Collections.sort(dbBookingList, new Comparator<Booking>(){
-//            public int compare(Booking b1, Booking b2) {
-//                if (b1.getDate().equals(b2.getDate())){
-//                    if (b1.getHour() > (b2.getHour())) {
-//                        return 1;
-//                    } else {
-//                        return -1;
-//                    }
-//                }
-//                return 0;
-//            }
-//        });
-//    }
+    private int sortPrev(Booking b1, Booking b2, Date b1Date, Date b2Date, boolean dateComp){
+        if (!dateComp){
+            if (b2Date.after(b1Date)) {
+                return 1;
+            } else {
+                return -1;
+            }
+        } else {
+            if (b1.getHour() < (b2.getHour())) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    }
+
+    private int sortUpcoming(Booking b1, Booking b2, Date b1Date, Date b2Date, boolean dateComp){
+        if (!dateComp){
+            if (b2Date.before(b1Date)) {
+                return 1;
+            } else {
+                return -1;
+            }
+        } else {
+            if (b1.getHour() > (b2.getHour())) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    }
+
 }

@@ -44,6 +44,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -148,7 +150,9 @@ public class SettingsFragment extends Fragment{
                                     } else if (!pulledBooking.getDate().equals(TODAY)){
                                         dbBookingList.add(pulledBooking);
                                     }
-                                }                            }
+                                }
+                            }
+                            sort();
                             bookingAdapter.notifyDataSetChanged();
                         }
                     }
@@ -194,7 +198,7 @@ public class SettingsFragment extends Fragment{
                                 cal.setTime(new Date());
                                 cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH)-30);
                                 Date archiveDate = cal.getTime();
-                                
+
 
                                 if (bookingDate != null && !(bookingDate.after(todayDate)) && bookingDate.after(archiveDate)){ // TODO: user check here after implementing user authent.
                                     Date bookingTime = null;
@@ -207,7 +211,10 @@ public class SettingsFragment extends Fragment{
                                         dbBookingList.add(pulledBooking);
                                     } else if (!pulledBooking.getDate().equals(TODAY)){
                                         dbBookingList.add(pulledBooking);
-                                    }                                }                            }
+                                    }
+                                }
+                            }
+                            sort();
                             bookingAdapter.notifyDataSetChanged();
                         }
                     }
@@ -322,4 +329,46 @@ public class SettingsFragment extends Fragment{
         });
     }
 
+    private void sort(){
+        Collections.sort(dbBookingList, new Comparator<Booking>(){
+            public int compare(Booking b1, Booking b2)
+            {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date b1Date = null;
+                Date b2Date = null;
+
+                try {
+                    b1Date = sdf.parse(b1.getDate());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    b2Date = sdf.parse(b2.getDate());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                if (b2Date.after(b1Date)) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        });
+    }
+
+//    private void sorthr(){
+//        Collections.sort(dbBookingList, new Comparator<Booking>(){
+//            public int compare(Booking b1, Booking b2) {
+//                if (b1.getDate().equals(b2.getDate())){
+//                    if (b1.getHour() > (b2.getHour())) {
+//                        return 1;
+//                    } else {
+//                        return -1;
+//                    }
+//                }
+//                return 0;
+//            }
+//        });
+//    }
 }

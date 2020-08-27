@@ -9,6 +9,7 @@ import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -189,8 +190,13 @@ public class SettingsFragment extends Fragment{
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
+                                Calendar cal = Calendar.getInstance();
+                                cal.setTime(new Date());
+                                cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH)-30);
+                                Date archiveDate = cal.getTime();
+                                
 
-                                if (bookingDate != null && !(bookingDate.after(todayDate))){ // TODO: user check here after implementing user authent.
+                                if (bookingDate != null && !(bookingDate.after(todayDate)) && bookingDate.after(archiveDate)){ // TODO: user check here after implementing user authent.
                                     Date bookingTime = null;
                                     try {
                                         bookingTime = timeFormat.parse(pulledBooking.getEndHr() + ":" + pulledBooking.getMinute());

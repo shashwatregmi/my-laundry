@@ -3,6 +3,7 @@ package com.example.mylaundry.ui.settings;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.DateFormat;

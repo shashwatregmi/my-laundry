@@ -34,6 +34,7 @@ import com.example.mylaundry.Booking;
 import com.example.mylaundry.MachineListAdapter;
 import com.example.mylaundry.MainActivity;
 import com.example.mylaundry.R;
+import com.example.mylaundry.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
@@ -108,6 +109,7 @@ public class SettingsFragment extends Fragment{
             ((Activity) root.getContext()).getWindow().setStatusBarColor(ContextCompat.getColor(root.getContext(), R.color.colorAccent));
         }
         return root;
+
     }
 
     private void getUpcomingBookings(View root){
@@ -255,7 +257,7 @@ public class SettingsFragment extends Fragment{
                                 //TODO: open a new activity
                                 return true;
                             case R.id.logout:
-                                //TODO: logout this user
+                                startActivity(new Intent(getContext(), LoginActivity.class));
                                 return true;
                             default:
                                 return false;

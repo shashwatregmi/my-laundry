@@ -11,8 +11,9 @@
         android:id="@+id/username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="344dp"
+        android:layout_marginTop="392dp"
         android:fontFamily="@font/aldrich"
+        android:hapticFeedbackEnabled="true"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
@@ -25,8 +26,9 @@
         android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/aldrich"
+        android:hapticFeedbackEnabled="true"
         android:hint="@string/prompt_password"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
@@ -42,16 +44,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="32dp"
         android:enabled="false"
         android:fontFamily="@font/aldrich"
         android:text="@string/action_sign_in"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.728" />
+        app:layout_constraintVertical_bias="0.701" />
 
     <ProgressBar
         android:id="@+id/loading"
@@ -70,8 +72,8 @@
         app:layout_constraintVertical_bias="0.3" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="411dp"
-        android:layout_height="303dp"
+        android:layout_width="412dp"
+        android:layout_height="361dp"
         android:adjustViewBounds="true"
         android:background="@drawable/gradient"
         app:layout_constraintBottom_toTopOf="@+id/username"
@@ -90,7 +92,26 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.43"
             app:srcCompat="@drawable/testlogin" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="100dp"
+            android:fontFamily="@font/source_sans_pro_black"
+            android:text="my laundry"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView6"
+            app:layout_constraintVertical_bias="0.347" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

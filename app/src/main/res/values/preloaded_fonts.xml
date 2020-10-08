@@ -3,6 +3,8 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/aldrich</item>
         <item>@font/alegreya_sans_black</item>
+        <item>@font/roboto</item>
+        <item>@font/roboto_bold</item>
         <item>@font/source_sans_pro_bold</item>
     </array>
 </resources>

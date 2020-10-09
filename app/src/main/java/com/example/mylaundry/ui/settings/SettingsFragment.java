@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -18,10 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -64,6 +67,8 @@ public class SettingsFragment extends Fragment{
     private MainActivity main;
     private Date currentTime = null;
     private DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+    private static final Integer PHOTO_REQ_CODE = 0;
+    private ImageView profileimg;
 
     @SuppressLint("ResourceType")
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -73,6 +78,7 @@ public class SettingsFragment extends Fragment{
         final View root = inflater.inflate(R.layout.fragment_settings, container, false);
         getCurrentTime();
 
+        profileimg = root.findViewById(R.id.profile_image);
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
@@ -109,8 +115,27 @@ public class SettingsFragment extends Fragment{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ((Activity) root.getContext()).getWindow().setStatusBarColor(ContextCompat.getColor(root.getContext(), R.color.colorAccent));
         }
-        return root;
 
+        profileimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Please pick the image"), PHOTO_REQ_CODE);
+            }
+        });
+
+        return root;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == PHOTO_REQ_CODE && resultCode == getActivity().RESULT_OK && data != null){
+            Uri imagedata = data.getData();
+            profileimg.setImageURI(imagedata);
+            // TODO: save this to the database.. and load it above too...
+        }
     }
 
     private void getUpcomingBookings(View root){

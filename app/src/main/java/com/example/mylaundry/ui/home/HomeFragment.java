@@ -23,6 +23,8 @@ import com.example.mylaundry.MachineItemList;
 import com.example.mylaundry.MachineListAdapter;
 import com.example.mylaundry.MainActivity;
 import com.example.mylaundry.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.util.ArrayList;
 
@@ -46,6 +48,11 @@ public class HomeFragment extends Fragment {
         machineItemList.add(new MachineItemList(R.drawable.washer, "Washer #1", "This washer is currently available!"));
         machineItemList.add(new MachineItemList(R.drawable.washer, "Washer #2", "This washer is currently available!"));
 
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this.getContext());
+        if (signInAccount != null){
+            System.out.println(signInAccount.getDisplayName());
+            System.out.println(signInAccount);
+        }
 
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 

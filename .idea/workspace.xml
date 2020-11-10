@@ -15,9 +15,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a4eed9b-d192-4fab-a6e6-dae74817f2bd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_auth_17_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_auth_api_phone_17_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_auth_base_17_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_auth_19_3_2_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_base_17_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_base_17_1_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_auth_interop_18_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_auth_interop_19_0_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/ui/settings/SettingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/ui/settings/SettingsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/ui/login/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/ui/login/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,37 +264,19 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="245" y="168" key="#PSD" timestamp="1594847258637">
-      <screen x="0" y="23" width="1440" height="812" />
-    </state>
-    <state x="245" y="168" key="#PSD/0.23.1440.812@0.23.1440.812" timestamp="1594847258637" />
     <state x="413" y="62" key="#app" timestamp="1602143098730">
       <screen x="0" y="23" width="1440" height="803" />
     </state>
     <state x="413" y="62" key="#app/0.23.1440.803@0.23.1440.803" timestamp="1602143098730" />
-    <state x="533" y="143" key="#com.intellij.ide.util.MemberChooser" timestamp="1598428035155">
-      <screen x="0" y="23" width="1440" height="810" />
+    <state x="533" y="143" key="#com.intellij.ide.util.MemberChooser" timestamp="1604995787688">
+      <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state x="533" y="143" key="#com.intellij.ide.util.MemberChooser/0.23.1440.807@0.23.1440.807" timestamp="1595369012136" />
     <state x="533" y="143" key="#com.intellij.ide.util.MemberChooser/0.23.1440.810@0.23.1440.810" timestamp="1598428035155" />
-    <state x="533" y="144" key="#com.intellij.ide.util.MemberChooser/0.23.1440.812@0.23.1440.812" timestamp="1594886190458" />
-    <state x="533" y="144" key="#com.intellij.ide.util.MemberChooser/0.23.1440.813@0.23.1440.813" timestamp="1594884741511" />
-    <state x="458" y="183" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1595367092351">
-      <screen x="0" y="23" width="1440" height="810" />
-    </state>
-    <state x="458" y="177" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1593556631434" />
-    <state x="458" y="183" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.810@0.23.1440.810" timestamp="1595367092351" />
-    <state x="458" y="183" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.812@0.23.1440.812" timestamp="1594711397103" />
-    <state x="308" y="190" key="AndroidCreateResourceFileDialog" timestamp="1595368741575">
-      <screen x="0" y="23" width="1440" height="807" />
-    </state>
-    <state x="308" y="190" key="AndroidCreateResourceFileDialog/0.23.1440.807@0.23.1440.807" timestamp="1595368741575" />
-    <state x="308" y="191" key="AndroidCreateResourceFileDialog/0.23.1440.812@0.23.1440.812" timestamp="1594109440432" />
+    <state x="533" y="143" key="#com.intellij.ide.util.MemberChooser/0.23.1440.812@0.23.1440.812" timestamp="1604995787688" />
     <state x="575" y="280" key="AndroidCreateXmlResourceDialog" timestamp="1601883034872">
       <screen x="0" y="23" width="1440" height="803" />
     </state>
     <state x="575" y="280" key="AndroidCreateXmlResourceDialog/0.23.1440.803@0.23.1440.803" timestamp="1601883034872" />
-    <state x="575" y="283" key="AndroidCreateXmlResourceDialog/0.23.1440.812@0.23.1440.812" timestamp="1594692040184" />
     <state x="408" y="186" width="644" height="476" key="Downloadable.Font.Dialog.Size" timestamp="1602142421640">
       <screen x="0" y="23" width="1440" height="805" />
     </state>
@@ -284,9 +289,6 @@
     <state width="699" height="205" key="GridCell.Tab.0.bottom/0.23.1440.805@0.23.1440.805" timestamp="1602142743187" />
     <state width="1398" height="207" key="GridCell.Tab.0.bottom/0.23.1440.807@0.23.1440.807" timestamp="1597996927051" />
     <state width="1398" height="207" key="GridCell.Tab.0.bottom/0.23.1440.810@0.23.1440.810" timestamp="1597995776585" />
-    <state width="1398" height="208" key="GridCell.Tab.0.bottom/0.23.1440.812@0.23.1440.812" timestamp="1594974709320" />
-    <state width="699" height="209" key="GridCell.Tab.0.bottom/0.23.1440.813@0.23.1440.813" timestamp="1594939386317" />
-    <state width="699" height="243" key="GridCell.Tab.0.bottom/0.23.1440.815@0.23.1440.815" timestamp="1594884835080" />
     <state width="699" height="205" key="GridCell.Tab.0.center" timestamp="1602142918185">
       <screen x="0" y="23" width="1440" height="803" />
     </state>
@@ -294,9 +296,6 @@
     <state width="699" height="205" key="GridCell.Tab.0.center/0.23.1440.805@0.23.1440.805" timestamp="1602142743186" />
     <state width="1398" height="207" key="GridCell.Tab.0.center/0.23.1440.807@0.23.1440.807" timestamp="1597996927051" />
     <state width="1398" height="207" key="GridCell.Tab.0.center/0.23.1440.810@0.23.1440.810" timestamp="1597995776584" />
-    <state width="1398" height="208" key="GridCell.Tab.0.center/0.23.1440.812@0.23.1440.812" timestamp="1594974709319" />
-    <state width="699" height="209" key="GridCell.Tab.0.center/0.23.1440.813@0.23.1440.813" timestamp="1594939386316" />
-    <state width="699" height="243" key="GridCell.Tab.0.center/0.23.1440.815@0.23.1440.815" timestamp="1594884835079" />
     <state width="699" height="205" key="GridCell.Tab.0.left" timestamp="1602142918185">
       <screen x="0" y="23" width="1440" height="803" />
     </state>
@@ -304,9 +303,6 @@
     <state width="699" height="205" key="GridCell.Tab.0.left/0.23.1440.805@0.23.1440.805" timestamp="1602142743186" />
     <state width="1398" height="207" key="GridCell.Tab.0.left/0.23.1440.807@0.23.1440.807" timestamp="1597996927051" />
     <state width="1398" height="207" key="GridCell.Tab.0.left/0.23.1440.810@0.23.1440.810" timestamp="1597995776584" />
-    <state width="1398" height="208" key="GridCell.Tab.0.left/0.23.1440.812@0.23.1440.812" timestamp="1594974709319" />
-    <state width="699" height="209" key="GridCell.Tab.0.left/0.23.1440.813@0.23.1440.813" timestamp="1594939386316" />
-    <state width="699" height="243" key="GridCell.Tab.0.left/0.23.1440.815@0.23.1440.815" timestamp="1594884835078" />
     <state width="699" height="205" key="GridCell.Tab.0.right" timestamp="1602142918186">
       <screen x="0" y="23" width="1440" height="803" />
     </state>
@@ -314,21 +310,5 @@
     <state width="699" height="205" key="GridCell.Tab.0.right/0.23.1440.805@0.23.1440.805" timestamp="1602142743187" />
     <state width="1398" height="207" key="GridCell.Tab.0.right/0.23.1440.807@0.23.1440.807" timestamp="1597996927051" />
     <state width="1398" height="207" key="GridCell.Tab.0.right/0.23.1440.810@0.23.1440.810" timestamp="1597995776585" />
-    <state width="1398" height="208" key="GridCell.Tab.0.right/0.23.1440.812@0.23.1440.812" timestamp="1594974709320" />
-    <state width="699" height="209" key="GridCell.Tab.0.right/0.23.1440.813@0.23.1440.813" timestamp="1594939386317" />
-    <state width="699" height="243" key="GridCell.Tab.0.right/0.23.1440.815@0.23.1440.815" timestamp="1594884835080" />
-    <state x="497" y="214" key="chooseDestDirectoryDialog" timestamp="1594110499006">
-      <screen x="0" y="23" width="1440" height="812" />
-    </state>
-    <state x="497" y="214" key="chooseDestDirectoryDialog/0.23.1440.812@0.23.1440.812" timestamp="1594110499006" />
-    <state x="100" y="123" width="1240" height="613" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1594882718153">
-      <screen x="0" y="23" width="1440" height="813" />
-    </state>
-    <state x="100" y="123" width="1240" height="612" key="com.android.tools.idea.avdmanager.AvdListDialog/0.23.1440.812@0.23.1440.812" timestamp="1594801145170" />
-    <state x="100" y="123" width="1240" height="613" key="com.android.tools.idea.avdmanager.AvdListDialog/0.23.1440.813@0.23.1440.813" timestamp="1594882718153" />
-    <state x="422" y="52" key="refactoring.ChangeSignatureDialog" timestamp="1594801653912">
-      <screen x="0" y="23" width="1440" height="812" />
-    </state>
-    <state x="422" y="52" key="refactoring.ChangeSignatureDialog/0.23.1440.812@0.23.1440.812" timestamp="1594801653912" />
   </component>
 </project>

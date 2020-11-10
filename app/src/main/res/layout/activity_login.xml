@@ -38,7 +38,7 @@
         android:textColor="#74121212"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintBottom_toTopOf="@+id/loginBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
         app:layout_constraintVertical_bias="0.0" />
@@ -65,13 +65,13 @@
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/loginBtn"
         android:layout_width="161dp"
         android:layout_height="48dp"
         android:layout_gravity="start"
         android:layout_marginBottom="32dp"
         android:background="@drawable/gradientreverse"
-        android:enabled="false"
+        android:enabled="true"
         android:fontFamily="@font/roboto"
         android:text="Login / Register"
         android:textAllCaps="false"

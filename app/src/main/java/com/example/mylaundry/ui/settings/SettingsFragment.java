@@ -42,9 +42,14 @@ import com.example.mylaundry.R;
 import com.example.mylaundry.ui.login.LoginActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -73,6 +78,8 @@ public class SettingsFragment extends Fragment{
     private static final Integer PHOTO_REQ_CODE = 0;
     private ImageView profileimg;
     private TextView name;
+    private GoogleSignInClient mGoogleSignInClient;
+
 
     @SuppressLint("ResourceType")
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -88,13 +95,14 @@ public class SettingsFragment extends Fragment{
         Date date = new Date();
         TODAY = dateFormat.format(date);
         db = FirebaseFirestore.getInstance();
+
         bookingsTab = root.findViewById(R.id.tabLayout);
         getUpcomingBookings(root);
 
         GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this.getContext());
         if (signInAccount != null){
             name = root.findViewById(R.id.textView3);
-            name.setText("Welcome " + signInAccount.getGivenName());
+            name.setText("Welcome, " + signInAccount.getGivenName() + "!");
         }
 
         handlePopup(root);
@@ -289,10 +297,9 @@ public class SettingsFragment extends Fragment{
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch(item.getItemId()){
-                            case R.id.profile:
-                                //TODO: open a new activity
-                                return true;
                             case R.id.logout:
+                                FirebaseAuth.getInstance().signOut();
+
                                 startActivity(new Intent(getContext(), LoginActivity.class));
                                 return true;
                             default:

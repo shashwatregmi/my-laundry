@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,8 @@ import com.example.mylaundry.MachineListAdapter;
 import com.example.mylaundry.MainActivity;
 import com.example.mylaundry.R;
 import com.example.mylaundry.ui.login.LoginActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
@@ -69,6 +72,7 @@ public class SettingsFragment extends Fragment{
     private DateFormat timeFormat = new SimpleDateFormat("HH:mm");
     private static final Integer PHOTO_REQ_CODE = 0;
     private ImageView profileimg;
+    private TextView name;
 
     @SuppressLint("ResourceType")
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -86,6 +90,12 @@ public class SettingsFragment extends Fragment{
         db = FirebaseFirestore.getInstance();
         bookingsTab = root.findViewById(R.id.tabLayout);
         getUpcomingBookings(root);
+
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this.getContext());
+        if (signInAccount != null){
+            name = root.findViewById(R.id.textView3);
+            name.setText("Welcome " + signInAccount.getGivenName());
+        }
 
         handlePopup(root);
 

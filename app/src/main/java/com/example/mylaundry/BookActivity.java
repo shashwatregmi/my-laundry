@@ -39,6 +39,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
 
@@ -150,6 +151,13 @@ public class BookActivity extends AppCompatActivity {
                         SecureRandom random = new SecureRandom();
                         pinCode = random.nextInt(100000);
 
+                        Boolean earlyTimeError = false;
+                        Date date = new Date();
+                        Calendar calendar = GregorianCalendar.getInstance();
+                        calendar.setTime(date);
+                        int currHour = calendar.get(Calendar.HOUR_OF_DAY); // gets hour in 24h format
+                        int currMin = calendar.get(Calendar.MINUTE);
+
                         final Booking booking = new Booking(washerNumber, hourOfDay, minute,
                                 String.valueOf(todayView.getText()), bookingEnd, pinCode, signInAccount.getId());
                         boolean flagConflict = false;
@@ -160,7 +168,12 @@ public class BookActivity extends AppCompatActivity {
                             }
                         }
 
-                        if (!flagConflict){
+                        if ((hourOfDay < 23 && todayView.getText() == TODAY) ||
+                                (hourOfDay == currHour && minute < currMin && todayView.getText() == TODAY)){
+                            earlyTimeError = true;
+                        }
+
+                        if (!flagConflict && !earlyTimeError){
                             dbBooking.add(booking)
                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @SuppressLint("DefaultLocale")
@@ -189,6 +202,10 @@ public class BookActivity extends AppCompatActivity {
                             dbBookingList.add(booking);
                             sort();
                             bookingAdapter.notifyDataSetChanged();
+                        } else if (earlyTimeError) {
+                            EarlyTimeError conflictDialog = new EarlyTimeError();
+                            conflictDialog.show(getSupportFragmentManager(), "Time Conflict Error");
+                            book.callOnClick();
                         } else {
                             TimeConflictDialog conflictDialog = new TimeConflictDialog();
                             conflictDialog.show(getSupportFragmentManager(), "Time Conflict Error");

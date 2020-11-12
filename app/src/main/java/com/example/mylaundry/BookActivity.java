@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -55,6 +57,7 @@ public class BookActivity extends AppCompatActivity {
     private ArrayList<Booking> dbBookingList = new ArrayList<>();
     private Date currentTime = null;
     private DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+    private GoogleSignInAccount signInAccount;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -69,7 +72,7 @@ public class BookActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         final int washerNumber = intent.getIntExtra("Number", 0);
         getCurrentTime();
-
+        signInAccount = GoogleSignIn.getLastSignedInAccount(BookActivity.this);
 
         //TODO: add database pulled bookings here....
         // will need to filter by current date and machine...
@@ -146,8 +149,9 @@ public class BookActivity extends AppCompatActivity {
                         }
                         SecureRandom random = new SecureRandom();
                         pinCode = random.nextInt(100000);
+
                         final Booking booking = new Booking(washerNumber, hourOfDay, minute,
-                                String.valueOf(todayView.getText()), bookingEnd, pinCode);
+                                String.valueOf(todayView.getText()), bookingEnd, pinCode, signInAccount.getId());
                         boolean flagConflict = false;
                         for (Booking b : dbBookingList){
                             if ((b.getEndHr() == hourOfDay && b.getMinute() >= minute) || b.getHour() == hourOfDay) {

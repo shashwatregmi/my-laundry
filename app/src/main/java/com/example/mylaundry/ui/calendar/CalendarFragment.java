@@ -34,6 +34,8 @@ import com.example.mylaundry.BookItemAdapter;
 import com.example.mylaundry.Booking;
 import com.example.mylaundry.R;
 import com.example.mylaundry.TimeConflictDialog;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -69,6 +71,7 @@ public class CalendarFragment extends Fragment {
     private ArrayList<Booking> dbBookingList = new ArrayList<>();
     private Date currentTime = null;
     private DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+    private GoogleSignInAccount signInAccount;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -82,6 +85,7 @@ public class CalendarFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
 
         getCurrentTime();
+        signInAccount = GoogleSignIn.getLastSignedInAccount(getContext());
 
         View root = inflater.inflate(R.layout.fragment_calendar, container, false);
         Spinner spinner = (Spinner) root.findViewById(R.id.spinner);
@@ -176,7 +180,8 @@ public class CalendarFragment extends Fragment {
                         }
                         SecureRandom random = new SecureRandom();
                         pinCode = random.nextInt(100000);
-                        final Booking booking = new Booking(spinnerposition + 1, hourOfDay, minute, String.valueOf(todayView.getText()), bookingEnd, pinCode);
+                        final Booking booking = new Booking(spinnerposition + 1, hourOfDay, minute,
+                                String.valueOf(todayView.getText()), bookingEnd, pinCode, signInAccount.getId());
                         boolean flagConflict = false;
                         for (Booking b : dbBookingList){
                             if ((b.getEndHr() == hourOfDay && b.getMinute() >= minute) || b.getHour() == hourOfDay) {

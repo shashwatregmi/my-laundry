@@ -78,7 +78,6 @@ public class SettingsFragment extends Fragment{
     private static final Integer PHOTO_REQ_CODE = 0;
     private ImageView profileimg;
     private TextView name;
-    private GoogleSignInClient mGoogleSignInClient;
 
 
     @SuppressLint("ResourceType")

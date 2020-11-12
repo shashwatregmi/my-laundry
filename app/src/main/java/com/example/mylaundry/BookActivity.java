@@ -211,7 +211,6 @@ public class BookActivity extends AppCompatActivity {
                             conflictDialog.show(getSupportFragmentManager(), "Time Conflict Error");
                             book.callOnClick();
                         }
-
                     }
                 }, timeNow.get(Calendar.HOUR_OF_DAY), timeNow.get(Calendar.MINUTE), false);
                 timePicker.show();

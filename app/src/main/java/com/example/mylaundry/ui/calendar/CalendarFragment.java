@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mylaundry.BookActivity;
 import com.example.mylaundry.BookItemAdapter;
 import com.example.mylaundry.Booking;
+import com.example.mylaundry.EarlyTimeError;
 import com.example.mylaundry.R;
 import com.example.mylaundry.TimeConflictDialog;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -51,6 +52,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
@@ -180,6 +182,13 @@ public class CalendarFragment extends Fragment {
                         }
                         SecureRandom random = new SecureRandom();
                         pinCode = random.nextInt(100000);
+                        Boolean earlyTimeError = false;
+                        Date date = new Date();
+                        Calendar calendar = GregorianCalendar.getInstance();
+                        calendar.setTime(date);
+                        int currHour = calendar.get(Calendar.HOUR_OF_DAY); // gets hour in 24h format
+                        int currMin = calendar.get(Calendar.MINUTE);
+
                         final Booking booking = new Booking(spinnerposition + 1, hourOfDay, minute,
                                 String.valueOf(todayView.getText()), bookingEnd, pinCode, signInAccount.getId());
                         boolean flagConflict = false;
@@ -189,9 +198,16 @@ public class CalendarFragment extends Fragment {
                                 break;
                             }
                         }
-                        if (!flagConflict) {
+
+                        if ((hourOfDay < 23 && todayView.getText() == TODAY) ||
+                                (hourOfDay == currHour && minute < currMin && todayView.getText() == TODAY)){
+                            earlyTimeError = true;
+                        }
+
+                        if (!flagConflict && !earlyTimeError){
                             dbBooking.add(booking)
                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @SuppressLint("DefaultLocale")
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
                                             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -217,6 +233,10 @@ public class CalendarFragment extends Fragment {
                             dbBookingList.add(booking);
                             sort();
                             bookingAdapter.notifyDataSetChanged();
+                        } else if (earlyTimeError) {
+                            EarlyTimeError conflictDialog = new EarlyTimeError();
+                            conflictDialog.show(getActivity().getSupportFragmentManager(), "Time Conflict Error");
+                            book.callOnClick();
                         } else {
                             TimeConflictDialog conflictDialog = new TimeConflictDialog();
                             conflictDialog.show(getActivity().getSupportFragmentManager(), "Time Conflict Error");

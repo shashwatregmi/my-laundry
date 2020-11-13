@@ -199,7 +199,7 @@ public class CalendarFragment extends Fragment {
                             }
                         }
 
-                        if ((hourOfDay < 23 && todayView.getText() == TODAY) ||
+                        if ((hourOfDay < currHour && todayView.getText() == TODAY) ||
                                 (hourOfDay == currHour && minute < currMin && todayView.getText() == TODAY)){
                             earlyTimeError = true;
                         }

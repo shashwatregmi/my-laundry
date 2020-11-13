@@ -275,7 +275,8 @@ public class CalendarFragment extends Fragment {
 
                             for (DocumentSnapshot d: tempBookings) {
                                 Booking pulledBooking = d.toObject(Booking.class);
-                                if (pulledBooking.getDate().equals(date) && pulledBooking.getWasher() == spinnerposition + 1) {
+                                if (pulledBooking.getDate().equals(date) && pulledBooking.getWasher() == spinnerposition + 1 &&
+                                pulledBooking.getUserCode().equals(signInAccount.getId())) {
                                     Date bookingTime = null;
                                     try {
                                         bookingTime = timeFormat.parse(pulledBooking.getEndHr() + ":" + pulledBooking.getMinute());

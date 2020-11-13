@@ -251,7 +251,8 @@ public class BookActivity extends AppCompatActivity {
 
                             for (DocumentSnapshot d: tempBookings){
                                 Booking pulledBooking = d.toObject(Booking.class);
-                                if (pulledBooking.getDate().equals(date) && pulledBooking.getWasher() == washerNumber){
+                                if (pulledBooking.getDate().equals(date) && pulledBooking.getWasher() == washerNumber  &&
+                                        pulledBooking.getUserCode().equals(signInAccount.getId())){
                                     Date bookingTime = null;
                                     try {
                                         bookingTime = timeFormat.parse(pulledBooking.getEndHr() + ":" + pulledBooking.getMinute());

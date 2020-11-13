@@ -78,7 +78,7 @@ public class SettingsFragment extends Fragment{
     private static final Integer PHOTO_REQ_CODE = 0;
     private ImageView profileimg;
     private TextView name;
-
+    private GoogleSignInAccount signInAccount;
 
     @SuppressLint("ResourceType")
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -98,7 +98,7 @@ public class SettingsFragment extends Fragment{
         bookingsTab = root.findViewById(R.id.tabLayout);
         getUpcomingBookings(root);
 
-        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this.getContext());
+        signInAccount = GoogleSignIn.getLastSignedInAccount(this.getContext());
         if (signInAccount != null){
             name = root.findViewById(R.id.textView3);
             name.setText("Welcome, " + signInAccount.getGivenName() + "!");
@@ -183,7 +183,8 @@ public class SettingsFragment extends Fragment{
                                     e.printStackTrace();
                                 }
 
-                                if (bookingDate != null && !(bookingDate.before(todayDate))){ // TODO: user check here after implementing user authent.
+                                if (bookingDate != null && !(bookingDate.before(todayDate))&&
+                                        pulledBooking.getUserCode().equals(signInAccount.getId())){
                                     Date bookingTime = null;
                                     try {
                                         bookingTime = timeFormat.parse(pulledBooking.getEndHr() + ":" + pulledBooking.getMinute());
@@ -245,7 +246,8 @@ public class SettingsFragment extends Fragment{
                                 Date archiveDate = cal.getTime();
 
 
-                                if (bookingDate != null && !(bookingDate.after(todayDate)) && bookingDate.after(archiveDate)){ // TODO: user check here after implementing user authent.
+                                if (bookingDate != null && !(bookingDate.after(todayDate)) && bookingDate.after(archiveDate)
+                                        && pulledBooking.getUserCode().equals(signInAccount.getId())){ // TODO: user check here after implementing user authent.
                                     Date bookingTime = null;
                                     try {
                                         bookingTime = timeFormat.parse(pulledBooking.getEndHr() + ":" + pulledBooking.getMinute());

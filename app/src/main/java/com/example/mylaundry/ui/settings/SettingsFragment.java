@@ -53,6 +53,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -151,7 +155,31 @@ public class SettingsFragment extends Fragment{
         if(requestCode == PHOTO_REQ_CODE && resultCode == getActivity().RESULT_OK && data != null){
             Uri imagedata = data.getData();
             profileimg.setImageURI(imagedata);
-            // TODO: save this to the database.. and load it above too...
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+            System.out.println(imagedata.getLastPathSegment());
+            final StorageReference imageRef = storageReference.child("images/" + imagedata.getLastPathSegment());
+            UploadTask uploadTask = imageRef.putFile(imagedata);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    System.out.println(e);
+                    Toast.makeText(getContext(), "Error! Image could not be saved!", Toast.LENGTH_LONG).show();
+                }
+            });
+            // get picture link from storage and put in into firebase
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    StorageMetadata snapshotMetadata = taskSnapshot.getMetadata();
+                    Task<Uri> downloadUrl = imageRef.getDownloadUrl();
+                    downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            //update firebase
+                        }
+                    });
+                }
+            });
         }
     }
 

@@ -15,9 +15,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a4eed9b-d192-4fab-a6e6-dae74817f2bd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/Photo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/BookActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/BookActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/Photo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/Photo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/ui/settings/SettingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mylaundry/ui/settings/SettingsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,7 +276,7 @@
     </state>
     <state x="408" y="186" width="644" height="476" key="Downloadable.Font.Dialog.Size/0.23.1440.803@0.23.1440.803" timestamp="1602141190159" />
     <state x="408" y="186" width="644" height="476" key="Downloadable.Font.Dialog.Size/0.23.1440.805@0.23.1440.805" timestamp="1602142421640" />
-    <state width="1398" height="202" key="GridCell.Tab.0.bottom" timestamp="1605774817725">
+    <state width="1398" height="202" key="GridCell.Tab.0.bottom" timestamp="1605775543243">
       <screen x="0" y="25" width="1440" height="806" />
     </state>
     <state width="699" height="205" key="GridCell.Tab.0.bottom/0.23.1440.803@0.23.1440.803" timestamp="1602142918186" />
@@ -271,8 +287,8 @@
     <state width="1398" height="207" key="GridCell.Tab.0.bottom/0.23.1440.813@0.23.1440.813" timestamp="1605168682619" />
     <state width="1398" height="207" key="GridCell.Tab.0.bottom/0.23.1440.815@0.23.1440.815" timestamp="1605083205427" />
     <state width="1398" height="202" key="GridCell.Tab.0.bottom/0.25.1440.805@0.25.1440.805" timestamp="1605772126935" />
-    <state width="1398" height="202" key="GridCell.Tab.0.bottom/0.25.1440.806@0.25.1440.806" timestamp="1605774817725" />
-    <state width="1398" height="202" key="GridCell.Tab.0.center" timestamp="1605774817723">
+    <state width="1398" height="202" key="GridCell.Tab.0.bottom/0.25.1440.806@0.25.1440.806" timestamp="1605775543243" />
+    <state width="1398" height="202" key="GridCell.Tab.0.center" timestamp="1605775543242">
       <screen x="0" y="25" width="1440" height="806" />
     </state>
     <state width="699" height="205" key="GridCell.Tab.0.center/0.23.1440.803@0.23.1440.803" timestamp="1602142918185" />
@@ -283,8 +299,8 @@
     <state width="1398" height="207" key="GridCell.Tab.0.center/0.23.1440.813@0.23.1440.813" timestamp="1605168682618" />
     <state width="1398" height="207" key="GridCell.Tab.0.center/0.23.1440.815@0.23.1440.815" timestamp="1605083205425" />
     <state width="1398" height="202" key="GridCell.Tab.0.center/0.25.1440.805@0.25.1440.805" timestamp="1605772126932" />
-    <state width="1398" height="202" key="GridCell.Tab.0.center/0.25.1440.806@0.25.1440.806" timestamp="1605774817723" />
-    <state width="1398" height="202" key="GridCell.Tab.0.left" timestamp="1605774817722">
+    <state width="1398" height="202" key="GridCell.Tab.0.center/0.25.1440.806@0.25.1440.806" timestamp="1605775543242" />
+    <state width="1398" height="202" key="GridCell.Tab.0.left" timestamp="1605775543241">
       <screen x="0" y="25" width="1440" height="806" />
     </state>
     <state width="699" height="205" key="GridCell.Tab.0.left/0.23.1440.803@0.23.1440.803" timestamp="1602142918185" />
@@ -295,8 +311,8 @@
     <state width="1398" height="207" key="GridCell.Tab.0.left/0.23.1440.813@0.23.1440.813" timestamp="1605168682617" />
     <state width="1398" height="207" key="GridCell.Tab.0.left/0.23.1440.815@0.23.1440.815" timestamp="1605083205424" />
     <state width="1398" height="202" key="GridCell.Tab.0.left/0.25.1440.805@0.25.1440.805" timestamp="1605772126931" />
-    <state width="1398" height="202" key="GridCell.Tab.0.left/0.25.1440.806@0.25.1440.806" timestamp="1605774817722" />
-    <state width="1398" height="202" key="GridCell.Tab.0.right" timestamp="1605774817724">
+    <state width="1398" height="202" key="GridCell.Tab.0.left/0.25.1440.806@0.25.1440.806" timestamp="1605775543241" />
+    <state width="1398" height="202" key="GridCell.Tab.0.right" timestamp="1605775543242">
       <screen x="0" y="25" width="1440" height="806" />
     </state>
     <state width="699" height="205" key="GridCell.Tab.0.right/0.23.1440.803@0.23.1440.803" timestamp="1602142918186" />
@@ -307,6 +323,6 @@
     <state width="1398" height="207" key="GridCell.Tab.0.right/0.23.1440.813@0.23.1440.813" timestamp="1605168682618" />
     <state width="1398" height="207" key="GridCell.Tab.0.right/0.23.1440.815@0.23.1440.815" timestamp="1605083205426" />
     <state width="1398" height="202" key="GridCell.Tab.0.right/0.25.1440.805@0.25.1440.805" timestamp="1605772126934" />
-    <state width="1398" height="202" key="GridCell.Tab.0.right/0.25.1440.806@0.25.1440.806" timestamp="1605774817724" />
+    <state width="1398" height="202" key="GridCell.Tab.0.right/0.25.1440.806@0.25.1440.806" timestamp="1605775543242" />
   </component>
 </project>

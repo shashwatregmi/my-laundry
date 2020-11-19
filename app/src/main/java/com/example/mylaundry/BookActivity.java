@@ -75,9 +75,6 @@ public class BookActivity extends AppCompatActivity {
         getCurrentTime();
         signInAccount = GoogleSignIn.getLastSignedInAccount(BookActivity.this);
 
-        //TODO: add database pulled bookings here....
-        // will need to filter by current date and machine...
-        // repeat this process when date changes onClick below...
         pullData(TODAY, washerNumber);
         bookingRecyclerView = findViewById(R.id.bookings);
         bookingLayoutManager = new LinearLayoutManager(this);

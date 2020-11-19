@@ -8,6 +8,10 @@ public class Photo {
         this.user = user;
     }
 
+    public Photo(){
+
+    }
+
     public String getUri() {
         return uri;
     }

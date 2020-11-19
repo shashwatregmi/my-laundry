@@ -33,6 +33,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.mylaundry.BookActivity;
 import com.example.mylaundry.BookItemAdapter;
 import com.example.mylaundry.Booking;
@@ -109,6 +110,7 @@ public class SettingsFragment extends Fragment{
             name = root.findViewById(R.id.textView3);
             name.setText("Welcome, " + signInAccount.getGivenName() + "!");
         }
+        getPhoto();
 
         handlePopup(root);
 
@@ -469,4 +471,24 @@ public class SettingsFragment extends Fragment{
         }
     }
 
+    private void getPhoto() {
+        db.collection("photos").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        List<DocumentSnapshot> tempPhotos = queryDocumentSnapshots.getDocuments();
+
+                        for (DocumentSnapshot d : tempPhotos) {
+                            Photo pulledPhoto = d.toObject(Photo.class);
+                            if (pulledPhoto.getUser().equals(signInAccount.getId())) {
+                                Glide.with(getContext())
+                                        .load(pulledPhoto.getUri())
+                                        .into(profileimg);
+                            }
+                        }
+                    }
+                }
+        });
+    }
 }

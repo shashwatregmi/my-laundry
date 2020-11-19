@@ -38,6 +38,7 @@ import com.example.mylaundry.BookItemAdapter;
 import com.example.mylaundry.Booking;
 import com.example.mylaundry.MachineListAdapter;
 import com.example.mylaundry.MainActivity;
+import com.example.mylaundry.Photo;
 import com.example.mylaundry.R;
 import com.example.mylaundry.ui.login.LoginActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -50,6 +51,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -175,7 +177,10 @@ public class SettingsFragment extends Fragment{
                     downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            //update firebase
+                            String temp = uri.toString();
+                            Photo photo = new Photo(temp, signInAccount.getId());
+                            CollectionReference dbPhoto = db.collection("photos");
+                            dbPhoto.add(photo);
                         }
                     });
                 }

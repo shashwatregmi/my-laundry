@@ -350,9 +350,11 @@ public class SettingsFragment extends Fragment{
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch(item.getItemId()){
+                            case R.id.changepic:
+                                profileimg.performClick();
+                                return true;
                             case R.id.logout:
                                 FirebaseAuth.getInstance().signOut();
-
                                 startActivity(new Intent(getContext(), LoginActivity.class));
                                 return true;
                             default:

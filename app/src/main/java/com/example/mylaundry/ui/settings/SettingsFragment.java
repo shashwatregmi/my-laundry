@@ -53,6 +53,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -180,26 +181,31 @@ public class SettingsFragment extends Fragment{
                         @Override
                         public void onSuccess(Uri uri) {
                             String temp = uri.toString();
-                            Photo photo = new Photo(temp, signInAccount.getId());
+                            final Photo photo = new Photo(temp, signInAccount.getId());
                             ArrayList<Photo> dbPhotos = new ArrayList<>();
                             db.collection("photos").get()
-                                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                            if (!queryDocumentSnapshots.isEmpty()) {
-                                                List<DocumentSnapshot> tempPhotos = queryDocumentSnapshots.getDocuments();
-                                                for (DocumentSnapshot d : tempPhotos) {
-                                                    Photo pulledPhoto = d.toObject(Photo.class);
-                                                    if (pulledPhoto.getUser().equals(signInAccount.getId())){
-                                                        db.collection("photos").document(d.getId()).delete();
-                                                        break;
-                                                    }
-                                                }
-                                            }
+                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                if (!queryDocumentSnapshots.isEmpty()) {
+                                    List<DocumentSnapshot> tempPhotos = queryDocumentSnapshots.getDocuments();
+                                    for (DocumentSnapshot d : tempPhotos) {
+                                        Photo pulledPhoto = d.toObject(Photo.class);
+                                        if (pulledPhoto.getUser().equals(signInAccount.getId())){
+                                            db.collection("photos").document(d.getId()).delete();
+                                            break;
                                         }
-                                    });
-                            CollectionReference dbPhoto = db.collection("photos");
-                            dbPhoto.add(photo);
+                                    }
+                                }
+                                CollectionReference dbPhoto = db.collection("photos");
+                                dbPhoto.add(photo).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Toast.makeText(getContext(), "Successfully Updated Picture", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                                }
+                            });
                         }
                     });
                 }

@@ -181,6 +181,23 @@ public class SettingsFragment extends Fragment{
                         public void onSuccess(Uri uri) {
                             String temp = uri.toString();
                             Photo photo = new Photo(temp, signInAccount.getId());
+                            ArrayList<Photo> dbPhotos = new ArrayList<>();
+                            db.collection("photos").get()
+                                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                            if (!queryDocumentSnapshots.isEmpty()) {
+                                                List<DocumentSnapshot> tempPhotos = queryDocumentSnapshots.getDocuments();
+                                                for (DocumentSnapshot d : tempPhotos) {
+                                                    Photo pulledPhoto = d.toObject(Photo.class);
+                                                    if (pulledPhoto.getUser().equals(signInAccount.getId())){
+                                                        db.collection("photos").document(d.getId()).delete();
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    });
                             CollectionReference dbPhoto = db.collection("photos");
                             dbPhoto.add(photo);
                         }

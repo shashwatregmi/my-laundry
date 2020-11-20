@@ -22,7 +22,7 @@
             android:layout_height="120dp"
             android:layout_marginTop="8dp"
             android:hapticFeedbackEnabled="true"
-            android:src="@drawable/shashwat"
+            android:src="@drawable/profile"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
